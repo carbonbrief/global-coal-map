@@ -13,7 +13,13 @@
     </head>
     <body>
         <div id='map'></div>
-        <div id='console'></div>
+        <div id='console'>
+            <p class="console-text">Drag the slider to explore how coal power has changed over the past ten years.</p>
+            <div class='session' id='sliderbar'>
+                    <h2>Year: <label id='active-hour'>2017</label></h2>
+                    <input id='slider' autocomplete="off" class='row' type='range' min='2007' max='2018' step='1' value='2017' />
+            </div>
+        </div>
         <script src="js/script.js"></script>
     </body>
 </html>

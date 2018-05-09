@@ -10,16 +10,27 @@ var map = new mapboxgl.Map({
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
-// Store an array of quantiles
-var max = 6720;
-var fifth = 6720 / 5;
-var quantiles = [];
-for (i = 0; i < 5; i++) {
-  var quantile = (fifth + i) * fifth;
-  quantiles.push(quantile);
+// store an array to convert 2018 to 'planned'
+var getYear = {
+    2007: "2007",
+    2008: "2008",
+    2009: "2009",
+    2010: "2010",
+    2011: "2011",
+    2012: "2012",
+    2013: "2013",
+    2014: "2014",
+    2015: "2015",
+    2016: "2016",
+    2017: "2017",
+    2018: "Planned"
 }
 
 map.on('load', function() {
+
+    var filterStartYear = ['<=', ['number', ['get', 'year1']], 2017];
+    var filterEndYear = ['>=', ['number', ['get', 'year2']], 2017];
+   //var filterType = ['!=', ['string', ['get','type']], 'placeholder'];
 
     map.addLayer({
         id: 'powerplants',
@@ -32,22 +43,12 @@ map.on('load', function() {
             'circle-radius': {
                 property: 'capacity',
                 type: 'exponential', // exponential scales in mapbox default to 1 which is a linear scale
+                // found that a linear scale seemed to work better for this than for the UK power map
                 stops: [
-                  [60, 4],
+                  [50, 4],
                   [6720, 30]
                 ]
               },
-            // 'circle-radius': [
-            //     'interpolate',
-            //     ['linear'],
-            //     ['number', ['get', 'capacity']],
-            //     // first number is the capacity and second is the size
-            //     0, 1,
-            //     10, 3,
-            //     100, 6,
-            //     1000, 9,
-            //     10000, 12
-            //     ],
           'circle-color': [
             'match',
             ['get', 'type'],
@@ -64,8 +65,20 @@ map.on('load', function() {
             /* other */ '#ffc83e'
           ],
           'circle-opacity': 0.45
-        }
-        //'filter': ['all', filterStartYear, filterEndYear, filterType]
+        },
+        'filter': ['all', filterStartYear, filterEndYear]
       });
+
+      // update hour filter when the slider is dragged
+    document.getElementById('slider').addEventListener('input', function(e) {
+        var year = parseInt(e.target.value);
+        // update the map
+        filterStartYear = ['<=', ['number', ['get', 'year1']], year];
+        filterEndYear = ['>=', ['number', ['get', 'year2']], year];
+        map.setFilter('powerplants', ['all', filterStartYear, filterEndYear]); //the filter only applies to the powerplants layer
+  
+        // update text in the UI
+        document.getElementById('active-hour').innerText = getYear[year];
+    });
 
 });
