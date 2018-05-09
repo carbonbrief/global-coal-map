@@ -28,9 +28,42 @@ var getYear = {
 
 map.on('load', function() {
 
-    var filterStartYear = ['<=', ['number', ['get', 'year1']], 2017];
-    var filterEndYear = ['>=', ['number', ['get', 'year2']], 2017];
+    var year = 2017;
+
+    // set up three different filters for the three different colours
+    // plants about to close
+    var filterYear1 = ['==', ['number', ['get', 'year2']], (year)];
+    // main plants
+    var filterStartYear2 = ['<', ['number', ['get', 'year1']], year];
+    var filterEndYear2 = ['>', ['number', ['get', 'year2']], year];
+    // plants newly opened
+    var filterYear3 = ['==', ['number', ['get', 'year1']], year];
+
+
    //var filterType = ['!=', ['string', ['get','type']], 'placeholder'];
+
+   map.addLayer({
+    id: 'closingsoon',
+    type: 'circle',
+    source: {
+        type: 'geojson',
+        data: './data/plants.geojson'
+    },
+    paint: {
+        'circle-radius': {
+            property: 'capacity',
+            type: 'exponential', // exponential scales in mapbox default to 1 which is a linear scale
+            // found that a linear scale seemed to work better for this than for the UK power map
+            stops: [
+              [50, 4],
+              [6720, 30]
+            ]
+          },
+      'circle-color': '#ff8767',
+      'circle-opacity': 0.45
+        },
+        'filter': ['all', filterYear1]
+   })
 
     map.addLayer({
         id: 'powerplants',
@@ -49,33 +82,53 @@ map.on('load', function() {
                   [6720, 30]
                 ]
               },
-          'circle-color': [
-            'match',
-            ['get', 'type'],
-            "Coal", "#ced1cc",
-            "Gas", "#4e80e5",
-            "Solar", "#ffc83e",
-            "Nuclear", "#dd54b6",
-            "Oil", "#a45edb",
-            "Hydro", "#43cfef",
-            "Wind", "#00a98e",
-            "Biomass", "#A7B734",
-            "Waste", "#ea545c",
-            "Other", "#cc9b7a",
-            /* other */ '#ffc83e'
-          ],
+          'circle-color': '#ffc83e',
+        //   [
+        //     'match',
+        //     (['get', 'year1'] == year), '#ced1cc',
+        //     (['get', 'year2'] == year), '#ea545c',
+        //     /* other */ '#ffc83e'
+        //   ],
           'circle-opacity': 0.45
         },
-        'filter': ['all', filterStartYear, filterEndYear]
+        'filter': ['all', filterStartYear2, filterEndYear2]
       });
+
+      map.addLayer({
+        id: 'newlyopened',
+        type: 'circle',
+        source: {
+            type: 'geojson',
+            data: './data/plants.geojson'
+        },
+        paint: {
+            'circle-radius': {
+                property: 'capacity',
+                type: 'exponential', // exponential scales in mapbox default to 1 which is a linear scale
+                // found that a linear scale seemed to work better for this than for the UK power map
+                stops: [
+                  [50, 4],
+                  [6720, 30]
+                ]
+              },
+          'circle-color': '#ced1cc',
+          'circle-opacity': 0.45
+            },
+            'filter': ['all', filterYear3]
+       })
 
       // update hour filter when the slider is dragged
     document.getElementById('slider').addEventListener('input', function(e) {
-        var year = parseInt(e.target.value);
+        year = parseInt(e.target.value);
+        // update the map filters
+        filterYear1 = ['==', ['number', ['get', 'year2']], (year)];
+        filterStartYear2 = ['<', ['number', ['get', 'year1']], year];
+        filterEndYear2 = ['>', ['number', ['get', 'year2']], year];
+        filterYear3 = ['==', ['number', ['get', 'year1']], year];
         // update the map
-        filterStartYear = ['<=', ['number', ['get', 'year1']], year];
-        filterEndYear = ['>=', ['number', ['get', 'year2']], year];
-        map.setFilter('powerplants', ['all', filterStartYear, filterEndYear]); //the filter only applies to the powerplants layer
+        map.setFilter('powerplants', ['all', filterStartYear2, filterEndYear2]); //the filter only applies to the powerplants layer
+        map.setFilter('closingsoon', ['all', filterYear1]);
+        map.setFilter('newlyopened', ['all', filterYear3]);
   
         // update text in the UI
         document.getElementById('active-hour').innerText = getYear[year];
