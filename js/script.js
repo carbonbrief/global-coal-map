@@ -81,4 +81,53 @@ map.on('load', function() {
         document.getElementById('active-hour').innerText = getYear[year];
     });
 
+    // Create a popup, but don't add it to the map yet.
+  var popup = new mapboxgl.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+
+  map.on('mouseenter', 'powerplants', function(e) {
+    // Change the cursor style as a UI indicator.
+    map.getCanvas().style.cursor = 'pointer';
+
+    var colorsArray = {
+      "Coal": "#ced1cc",
+      "Gas": "#4e80e5",
+      "Solar": "#ffc83e",
+      "Nuclear": "#dd54b6",
+      "Oil": "#a45edb",
+      "Hydro": "#43cfef",
+      "Wind": "#00a98e",
+      "Biomass": "#A7B734",
+      "Waste": "#ea545c",
+      "Other": "#cc9b7a"
+    }
+
+    var coordinates = e.features[0].geometry.coordinates.slice();
+    var name = e.features[0].properties.plant;
+    var capacity = e.features[0].properties.capacity;
+    var coalType = e.features[0].properties.coalType;
+    // match plant type to the color in colorsArray, so that the title of the tooltip changes color
+    var plantColor = colorsArray[e.features[0].properties.type]; 
+
+    // Ensure that if the map is zoomed out such that multiple
+    // copies of the feature are visible, the popup appears
+    // over the copy being pointed to.
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+
+    // Populate the popup and set its coordinates
+    // based on the feature found.
+    popup.setLngLat(coordinates)
+        .setHTML('<h3 style = "color: ' + plantColor + ';">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
+        .addTo(map);
+    });
+
+    map.on('mouseleave', 'powerplants', function() {
+        map.getCanvas().style.cursor = '';
+        popup.remove();
+    });
+
 });

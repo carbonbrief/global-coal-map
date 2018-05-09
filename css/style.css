@@ -30,6 +30,8 @@ body {
     font-family: 'PT Sans Narrow', Helvetica, Arial, Sans-serif;
     font-weight: bold;
     font-size: 18px;
+    margin-top: 0px;
+    margin-bottom: 10px;
   }
 
   .console-text {
@@ -61,3 +63,37 @@ body {
     height: 12px;
     width: 100%;
   }
+
+  p {
+    margin-top: 2px;
+    margin-bottom: 0px;
+  }
+
+/* style the map tooltip */
+
+.mapboxgl-popup-content {
+  color: #F3F3DD;
+  background-color: #4e4e4e;
+  /* border-color: #91785D; */
+  max-width: 250px;
+  /* box-shadow: 3px 3px 2px #8B5D33; */
+}
+
+/* change colour of tip to match popup */
+
+.mapboxgl-popup-anchor-top .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-top-left .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-top-right .mapboxgl-popup-tip {
+    border-bottom-color: #4e4e4e;
+    }
+.mapboxgl-popup-anchor-bottom .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-bottom-left .mapboxgl-popup-tip,
+.mapboxgl-popup-anchor-bottom-right .mapboxgl-popup-tip {
+    border-top-color: #4e4e4e;
+    }
+.mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
+    border-right-color: #4e4e4e;
+    }
+.mapboxgl-popup-anchor-right .mapboxgl-popup-tip {
+    border-left-color: #4e4e4e;
+    }

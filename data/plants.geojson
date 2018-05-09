@@ -118777,7 +118777,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 21.780052,72.979065 ]
+       "coordinates":  [ 72.979065, 21.780052 ]
     },
     "properties": {
     "plant":"Paguthan power station",
