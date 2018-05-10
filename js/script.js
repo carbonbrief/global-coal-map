@@ -23,7 +23,7 @@ var getYear = {
     2015: "2015",
     2016: "2016",
     2017: "2017",
-    2018: "Planned"
+    2018: "Future"
 }
 
 map.on('load', function() {
@@ -38,6 +38,10 @@ map.on('load', function() {
     var filterEndYear2 = ['>', ['number', ['get', 'year2']], year];
     // plants newly opened
     var filterYear3 = ['==', ['number', ['get', 'year1']], year];
+    // filter for plants planned
+    var filterYear4 = ['>=', ['number', ['get', 'year1']], 2018];
+    // filter to remove plants planned
+    var filterYear5 = ['<', ['number', ['get', 'year1']], 2018];
 
 
    //var filterType = ['!=', ['string', ['get','type']], 'placeholder'];
@@ -62,7 +66,7 @@ map.on('load', function() {
       'circle-color': '#ff8767',
       'circle-opacity': 0.45
         },
-        'filter': ['all', filterYear1]
+        'filter': ['all', filterYear1, filterYear5]
    })
 
     map.addLayer({
@@ -91,7 +95,7 @@ map.on('load', function() {
         //   ],
           'circle-opacity': 0.45
         },
-        'filter': ['all', filterStartYear2, filterEndYear2]
+        'filter': ['all', filterStartYear2, filterEndYear2, filterYear5]    // filter for start and end year AND make sure that start year is less than 2018 (filterYear5)
       });
 
       map.addLayer({
@@ -114,7 +118,30 @@ map.on('load', function() {
           'circle-color': '#ced1cc',
           'circle-opacity': 0.45
             },
-            'filter': ['all', filterYear3]
+            'filter': ['all', filterYear3, filterYear5]
+       })
+
+       map.addLayer({
+        id: 'planned',
+        type: 'circle',
+        source: {
+            type: 'geojson',
+            data: './data/plants.geojson'
+        },
+        paint: {
+            'circle-radius': {
+                property: 'capacity',
+                type: 'exponential', // exponential scales in mapbox default to 1 which is a linear scale
+                // found that a linear scale seemed to work better for this than for the UK power map
+                stops: [
+                  [50, 4],
+                  [6720, 30]
+                ]
+              },
+          'circle-color': '#dd54b6',
+          'circle-opacity': 0.45
+            },
+            'filter': ['all', filterYear4, filterYear3] // filter so that start year is greater than or equal to 2018 AND the slider is set to 2018
        })
 
       // update hour filter when the slider is dragged
@@ -126,9 +153,10 @@ map.on('load', function() {
         filterEndYear2 = ['>', ['number', ['get', 'year2']], year];
         filterYear3 = ['==', ['number', ['get', 'year1']], year];
         // update the map
-        map.setFilter('powerplants', ['all', filterStartYear2, filterEndYear2]); //the filter only applies to the powerplants layer
-        map.setFilter('closingsoon', ['all', filterYear1]);
-        map.setFilter('newlyopened', ['all', filterYear3]);
+        map.setFilter('powerplants', ['all', filterStartYear2, filterEndYear2, filterYear5]); //the filter only applies to the powerplants layer
+        map.setFilter('closingsoon', ['all', filterYear1, filterYear5]);
+        map.setFilter('newlyopened', ['all', filterYear3, filterYear5]);
+        map.setFilter('planned', ['all', filterYear4, filterYear3]);
   
         // update text in the UI
         document.getElementById('active-hour').innerText = getYear[year];
