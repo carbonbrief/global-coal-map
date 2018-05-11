@@ -40,18 +40,18 @@ map.on('load', function() {
 
     var year = 2017;
 
-    // set different filters for different colours
-    // plants about to close
-    var filterYear1 = ['==', ['number', ['get', 'year2']], (year)];
-    // main plants
-    var filterStartYear2 = ['<', ['number', ['get', 'year1']], year];
-    var filterEndYear2 = ['>', ['number', ['get', 'year2']], year];
-    // plants newly opened
-    var filterYear3 = ['==', ['number', ['get', 'year1']], year];
-    // filter for plants planned
-    var filterYear4 = ['>=', ['number', ['get', 'year1']], 2018];
-    // filter to remove plants planned
-    var filterYear5 = ['<', ['number', ['get', 'year1']], 2018];
+    // filters to add/remove
+
+    // plants about to close, which start before 2018
+    var filterYear1 = ['all', ['==', ['number', ['get', 'year2']], (year)], ['<', ['number', ['get', 'year1']], 2018]];
+    // main plants, which start before 2018. All = logical AND
+    var filterYear2 = ['all', ['<', ['number', ['get', 'year1']], year], ['>', ['number', ['get', 'year2']], year], ['<', ['number', ['get', 'year1']], 2018] ];
+    //var filterEndYear2 = ['>', ['number', ['get', 'year2']], year];
+    // plants newly opened, which start before 2018
+    var filterYear3 = ['all', ['==', ['number', ['get', 'year1']], year], ['<', ['number', ['get', 'year1']], 2018] ];
+    // filter for plants planned, ie. which start after 2018
+    var filterYear4 = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
+
     // filter for construction
     var filterStatus1 = ['==', ['string', ['get', 'status']], 'Construction'];
     // filter for permitted
@@ -81,7 +81,7 @@ map.on('load', function() {
       'circle-color': '#ff8767',
       'circle-opacity': 0.45
         },
-        'filter': ['all', filterYear1, filterYear5]
+        'filter': ['all', filterYear1]
    })
 
     map.addLayer({
@@ -103,7 +103,7 @@ map.on('load', function() {
           'circle-color': '#ffc83e',
           'circle-opacity': 0.45
         },
-        'filter': ['all', filterStartYear2, filterEndYear2, filterYear5]    // filter for start and end year AND make sure that start year is less than 2018 (filterYear5)
+        'filter': ['all', filterYear2]    // filter for start and end year AND make sure that start year is less than 2018 (filterYear5)
       });
 
       map.addLayer({
@@ -125,7 +125,7 @@ map.on('load', function() {
           'circle-color': '#ced1cc',
           'circle-opacity': 0.45
             },
-            'filter': ['all', filterYear3, filterYear5]
+            'filter': ['all', filterYear3]
        })
 
        map.addLayer({
@@ -147,7 +147,7 @@ map.on('load', function() {
           'circle-color': '#dd54b6',
           'circle-opacity': 0.45
             },
-        'filter': ['all', filterYear4, filterYear3, filterStatus1] 
+        'filter': ['all', filterYear4, filterStatus1] 
        })
 
        map.addLayer({
@@ -169,7 +169,7 @@ map.on('load', function() {
           'circle-color': '#dd54b6',
           'circle-opacity': 0.35
             },
-            'filter': ['all', filterYear4, filterYear3, filterStatus2] 
+            'filter': ['all', filterYear4, filterStatus2] 
        })
 
        map.addLayer({
@@ -191,7 +191,7 @@ map.on('load', function() {
           'circle-color': '#dd54b6',
           'circle-opacity': 0.25
             },
-            'filter': ['all', filterYear4, filterYear3, filterStatus3] 
+            'filter': ['all', filterYear4, filterStatus3] 
        })
 
        map.addLayer({
@@ -213,26 +213,26 @@ map.on('load', function() {
           'circle-color': '#dd54b6',
           'circle-opacity': 0.15
             },
-            'filter': ['all', filterYear4, filterYear3, filterStatus4] 
+            'filter': ['all', filterYear4, filterStatus4] 
        })
 
       // update hour filter when the slider is dragged
     document.getElementById('slider').addEventListener('input', function(e) {
         year = parseInt(e.target.value);
         // update the map filters
-        filterYear1 = ['==', ['number', ['get', 'year2']], (year)];
-        filterStartYear2 = ['<', ['number', ['get', 'year1']], year];
-        filterEndYear2 = ['>', ['number', ['get', 'year2']], year];
-        filterYear3 = ['==', ['number', ['get', 'year1']], year];
+        filterYear1 = ['all', ['==', ['number', ['get', 'year2']], year], ['<', ['number', ['get', 'year1']], 2018]];
+        filterYear2 = ['all', ['<', ['number', ['get', 'year1']], year], ['>', ['number', ['get', 'year2']], year] ];
+        filterYear3 = ['all', ['==', ['number', ['get', 'year1']], year], ['<', ['number', ['get', 'year1']], 2018] ];
+        filterYear4 = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
         // update the map
-        map.setFilter('powerplants', ['all', filterStartYear2, filterEndYear2, filterYear5]); //the filter only applies to the powerplants layer
-        map.setFilter('closing', ['all', filterYear1, filterYear5]);
-        map.setFilter('new', ['all', filterYear3, filterYear5]);
+        map.setFilter('powerplants', ['all', filterYear2]); //the filter only applies to the powerplants layer
+        map.setFilter('closing', ['all', filterYear1]);
+        map.setFilter('new', ['all', filterYear3]);
         // four different layers for the different planned opacities
-        map.setFilter('planned1', ['all', filterYear4, filterYear3, filterStatus1]);
-        map.setFilter('planned2', ['all', filterYear4, filterYear3, filterStatus2]);
-        map.setFilter('planned3', ['all', filterYear4, filterYear3, filterStatus3]);
-        map.setFilter('planned4', ['all', filterYear4, filterYear3, filterStatus4]);
+        map.setFilter('planned1', ['all', filterYear4, filterStatus1]);
+        map.setFilter('planned2', ['all', filterYear4, filterStatus2]);
+        map.setFilter('planned3', ['all', filterYear4, filterStatus3]);
+        map.setFilter('planned4', ['all', filterYear4, filterStatus4]);
   
         // update text in the UI. Use getYear array to ensure that 2018 displays as 'future'
         document.getElementById('active-hour').innerText = getYear[year];
