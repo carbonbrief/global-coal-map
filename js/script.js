@@ -3,8 +3,10 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2lqbmpqazdlMDBsdnRva284c
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'https://openmaptiles.github.io/dark-matter-gl-style/style-cdn.json',
-    center: [0, 10],
-    zoom: 2
+    center: [8, 10],
+    zoom: 2,
+    maxZoom: 19,
+    minZoom: 1
 });
 
 // Add zoom and rotation controls to the map.
