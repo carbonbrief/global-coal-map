@@ -84,6 +84,29 @@ p {
   left: calc(50% - 60px);
 }
 
+#key {
+  height: 25px;
+}
+
+#dropdown {
+  height: 50px;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url(https://www.carbonbrief.org/wp-content/uploads/2018/04/arrow-for-map.png) 96% / 15% no-repeat #333333;
+  background-size: 20px 13px;
+  border:2px;
+  padding: 4px;
+  color: #f3f3f3;
+  outline:0px;
+}
+
+#selectorRegion {
+ width: 120px;
+}
+
 /* style the map tooltip */
 /* #region */
 

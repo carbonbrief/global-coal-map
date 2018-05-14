@@ -40,7 +40,7 @@ map.on('load', function() {
 
     var year = 2017;
 
-    // filters to add/remove
+    // filters for slider
 
     // plants about to close, which start before 2018
     var filterYear1 = ['all', ['==', ['number', ['get', 'year2']], (year)], ['<', ['number', ['get', 'year1']], 2018]];
@@ -52,6 +52,7 @@ map.on('load', function() {
     // filter for plants planned, ie. which start after 2018
     var filterYear4 = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
 
+    // filters for planned
     // filter for construction
     var filterStatus1 = ['==', ['string', ['get', 'status']], 'Construction'];
     // filter for permitted
