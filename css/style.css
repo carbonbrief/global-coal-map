@@ -95,6 +95,7 @@ p {
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
+  appearance: none;
   background: url(https://www.carbonbrief.org/wp-content/uploads/2018/04/arrow-for-map.png) 96% / 15% no-repeat #333333;
   background-size: 20px 13px;
   border:2px;
