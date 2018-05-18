@@ -186,11 +186,11 @@ map.on('load', function() {
         year = parseInt(e.target.value);
         
         // update any map filters containing the variable year
-        var filterNew = ['any', ['==', ['number', ['get', 'start1']], year], ['==', ['number', ['get', 'start2']], year] ];
-        var filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)] ];
-        var filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
-        var filterOperating = ['all', ['!=', ['number', ['get', 'start1']], year], ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)]];
-        var filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['<', ['number', ['get', 'year1']], 2018] ];
+        filterNew = ['any', ['==', ['number', ['get', 'start1']], year], ['==', ['number', ['get', 'start2']], year] ];
+        filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)] ];
+        filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
+        filterOperating = ['all', ['!=', ['number', ['get', 'start1']], year], ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)]];
+        filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['<', ['number', ['get', 'year1']], 2018] ];
 
         // update the map
         map.setFilter('operating', ['all', filterOperating, filterOperating2, filterRegion]); //the filter only applies to the operating layer
@@ -205,9 +205,12 @@ map.on('load', function() {
 
     document.getElementById('selectorRegion').addEventListener('change', function(e) {
 
-        var dropdown = e.target.value;
+        // update variables
+        dropdown = e.target.value;
+        // declare year variable again so that it doesn't default to 2017
+        year = document.getElementById('slider').value;
 
-        // update the map filter
+        // update filter
         filterRegion = ['==', ['string', ['get', 'regionLabel']], dropdown];
 
         // update the map
