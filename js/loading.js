@@ -27,12 +27,12 @@ function rotate () {
     ctx.translate(-canvasWidth/2, -canvasWidth/2);
 
     var firstPart = ctx.createLinearGradient(0,0,0,100);
-    firstPart.addColorStop(0, '#dd54b6');
-    firstPart.addColorStop(0.7, '#ff8767');
-    firstPart.addColorStop(1, '#ffb469');
+    firstPart.addColorStop(0, '#a45edb');
+    firstPart.addColorStop(0.7, '#dd54b6');
+    firstPart.addColorStop(1, '#ff8767');
 
     var secondPart = ctx.createLinearGradient(0,0,0,100);
-    secondPart.addColorStop(1, '#ffb469');
+    secondPart.addColorStop(1, '#ff8767');
     secondPart.addColorStop(0.7, '#ffc83e');
     secondPart.addColorStop(0, '#ced1cc');
 

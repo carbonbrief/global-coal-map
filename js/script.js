@@ -42,10 +42,12 @@ map.on('load', function() {
 
     // FILTERS
 
-    // grab plants where the start year equals either start1 OR start 2
+    // NEW
+    // grab plants where the start year equals EITHER start1 OR start 2
     var filterNew = ['any', ['==', ['number', ['get', 'start1']], year], ['==', ['number', ['get', 'start2']], year] ];
-
-    // grab plants where the year is the year BEFORE the retire year
+    
+    // CLOSING
+    // grab plants where the slider year is the year BEFORE EITHER retire year
     var filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)] ];
 
     // FUTURE
