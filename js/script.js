@@ -4,9 +4,7 @@ var map = new mapboxgl.Map({
     container: 'map',
     style: 'https://openmaptiles.github.io/dark-matter-gl-style/style-cdn.json',
     center: [8, 10],
-    zoom: 2,
-    maxZoom: 19,
-    minZoom: 1
+    zoom: 1.5
 });
 
 // Add zoom and rotation controls to the map.
@@ -66,6 +64,9 @@ map.on('load', function() {
     // ensure that the slider year is between year1 and year2, and that it doesn't begin after 2018. using less then or equal operator because the filter above will remove those that need to be coloured for new or closing
     var filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['<', ['number', ['get', 'year1']], 2018] ];
 
+    // set up filter for region
+    var filterRegion = ['!=', ['string', ['get','regionLabel']], 'placeholder'];
+
    map.addLayer({
     id: 'closing',
     type: 'circle',
@@ -86,7 +87,7 @@ map.on('load', function() {
       'circle-color': '#ced1cc',
       'circle-opacity': 0.45
         },
-        'filter': ['all', filterClosing]
+        'filter': ['all', filterClosing, filterRegion]
    })
 
     map.addLayer({
@@ -108,7 +109,7 @@ map.on('load', function() {
           'circle-color': '#ffc83e',
           'circle-opacity': 0.45
         },
-        'filter': ['all', filterOperating, filterOperating2]    // filter for start and end year AND make sure that start year is less than 2018 (filterYear5)
+        'filter': ['all', filterOperating, filterOperating2, filterRegion]    // filter for start and end year AND make sure that start year is less than 2018 (filterYear5)
       });
 
       map.addLayer({
@@ -130,7 +131,7 @@ map.on('load', function() {
           'circle-color': '#ff8767',
           'circle-opacity': 0.45
             },
-            'filter': ['all', filterNew]
+            'filter': ['all', filterNew, filterRegion]
        })
 
        map.addLayer({
@@ -152,7 +153,7 @@ map.on('load', function() {
           'circle-color': '#a45edb',
           'circle-opacity': 0.35
             },
-            'filter': ['all', filterFuture, filterPlanned] 
+            'filter': ['all', filterFuture, filterPlanned, filterRegion] 
        })
 
        map.addLayer({
@@ -174,7 +175,7 @@ map.on('load', function() {
           'circle-color': '#dd54b6',
           'circle-opacity': 0.45
             },
-        'filter': ['all', filterFuture, filterConstruction] 
+        'filter': ['all', filterFuture, filterConstruction, filterRegion] 
        })
 
 
@@ -192,14 +193,30 @@ map.on('load', function() {
         var filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['<', ['number', ['get', 'year1']], 2018] ];
 
         // update the map
-        map.setFilter('operating', ['all', filterOperating, filterOperating2]); //the filter only applies to the operating layer
-        map.setFilter('closing', ['all', filterClosing]);
-        map.setFilter('new', ['all', filterNew]);
-        map.setFilter('construction', ['all', filterFuture, filterConstruction]);
-        map.setFilter('planned', ['all', filterFuture, filterPlanned]);
+        map.setFilter('operating', ['all', filterOperating, filterOperating2, filterRegion]); //the filter only applies to the operating layer
+        map.setFilter('closing', ['all', filterClosing, filterRegion]);
+        map.setFilter('new', ['all', filterNew, filterRegion]);
+        map.setFilter('construction', ['all', filterFuture, filterConstruction, filterRegion]);
+        map.setFilter('planned', ['all', filterFuture, filterPlanned, filterRegion]);
   
         // update text in the UI. Use getYear array to ensure that 2018 displays as 'future'
         document.getElementById('active-hour').innerText = getYear[year];
+    });
+
+    document.getElementById('selectorRegion').addEventListener('change', function(e) {
+
+        var dropdown = e.target.value;
+
+        // update the map filter
+        filterRegion = ['==', ['string', ['get', 'regionLabel']], dropdown];
+
+        // update the map
+        map.setFilter('operating', ['all', filterOperating, filterOperating2, filterRegion]); //the filter only applies to the operating layer
+        map.setFilter('closing', ['all', filterClosing, filterRegion]);
+        map.setFilter('new', ['all', filterNew, filterRegion]);
+        map.setFilter('construction', ['all', filterFuture, filterConstruction, filterRegion]);
+        map.setFilter('planned', ['all', filterFuture, filterPlanned, filterRegion]);
+
     });
 
     // Create a popup, but don't add it to the map yet.
