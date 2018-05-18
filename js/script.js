@@ -55,12 +55,8 @@ map.on('load', function() {
     // filters for planned
     // filter for construction
     var filterStatus1 = ['==', ['string', ['get', 'status']], 'Construction'];
-    // filter for permitted
-    var filterStatus2 = ['==', ['string', ['get', 'status']], 'Permitted'];
-    // filter for pre-permit
-    var filterStatus3 = ['==', ['string', ['get', 'status']], 'Pre-permit'];
-    // filter for announced
-    var filterStatus4 = ['==', ['string', ['get', 'status']], 'Announced'];
+    // filter for planned
+    var filterStatus2 = ['any', ['==', ['string', ['get', 'status']], 'Permitted'], ['==', ['string', ['get', 'status']], 'Pre-permit'], ['==', ['string', ['get', 'status']], 'Announced'] ];
 
    map.addLayer({
     id: 'closing',
@@ -79,7 +75,7 @@ map.on('load', function() {
               [6720, 30]
             ]
           },
-      'circle-color': '#ff8767',
+      'circle-color': '#ced1cc',
       'circle-opacity': 0.45
         },
         'filter': ['all', filterYear1]
@@ -123,14 +119,36 @@ map.on('load', function() {
                   [6720, 30]
                 ]
               },
-          'circle-color': '#ced1cc',
+          'circle-color': '#ff8767',
           'circle-opacity': 0.45
             },
             'filter': ['all', filterYear3]
        })
 
        map.addLayer({
-        id: 'planned1',
+        id: 'planned',
+        type: 'circle',
+        source: {
+            type: 'geojson',
+            data: './data/plants.geojson'
+        },
+        paint: {
+            'circle-radius': {
+                property: 'capacity',
+                type: 'exponential',
+                stops: [
+                  [50, 4],
+                  [6720, 30]
+                ]
+              },
+          'circle-color': '#a45edb',
+          'circle-opacity': 0.35
+            },
+            'filter': ['all', filterYear4, filterStatus2] 
+       })
+
+       map.addLayer({
+        id: 'construction',
         type: 'circle',
         source: {
             type: 'geojson',
@@ -151,71 +169,7 @@ map.on('load', function() {
         'filter': ['all', filterYear4, filterStatus1] 
        })
 
-       map.addLayer({
-        id: 'planned2',
-        type: 'circle',
-        source: {
-            type: 'geojson',
-            data: './data/plants.geojson'
-        },
-        paint: {
-            'circle-radius': {
-                property: 'capacity',
-                type: 'exponential',
-                stops: [
-                  [50, 4],
-                  [6720, 30]
-                ]
-              },
-          'circle-color': '#dd54b6',
-          'circle-opacity': 0.35
-            },
-            'filter': ['all', filterYear4, filterStatus2] 
-       })
 
-       map.addLayer({
-        id: 'planned3',
-        type: 'circle',
-        source: {
-            type: 'geojson',
-            data: './data/plants.geojson'
-        },
-        paint: {
-            'circle-radius': {
-                property: 'capacity',
-                type: 'exponential',
-                stops: [
-                  [50, 4],
-                  [6720, 30]
-                ]
-              },
-          'circle-color': '#dd54b6',
-          'circle-opacity': 0.25
-            },
-            'filter': ['all', filterYear4, filterStatus3] 
-       })
-
-       map.addLayer({
-        id: 'planned4',
-        type: 'circle',
-        source: {
-            type: 'geojson',
-            data: './data/plants.geojson'
-        },
-        paint: {
-            'circle-radius': {
-                property: 'capacity',
-                type: 'exponential',
-                stops: [
-                  [50, 4],
-                  [6720, 30]
-                ]
-              },
-          'circle-color': '#dd54b6',
-          'circle-opacity': 0.15
-            },
-            'filter': ['all', filterYear4, filterStatus4] 
-       })
 
       // update hour filter when the slider is dragged
     document.getElementById('slider').addEventListener('input', function(e) {
@@ -230,10 +184,8 @@ map.on('load', function() {
         map.setFilter('closing', ['all', filterYear1]);
         map.setFilter('new', ['all', filterYear3]);
         // four different layers for the different planned opacities
-        map.setFilter('planned1', ['all', filterYear4, filterStatus1]);
-        map.setFilter('planned2', ['all', filterYear4, filterStatus2]);
-        map.setFilter('planned3', ['all', filterYear4, filterStatus3]);
-        map.setFilter('planned4', ['all', filterYear4, filterStatus4]);
+        map.setFilter('construction', ['all', filterYear4, filterStatus1]);
+        map.setFilter('planned', ['all', filterYear4, filterStatus2]);
   
         // update text in the UI. Use getYear array to ensure that 2018 displays as 'future'
         document.getElementById('active-hour').innerText = getYear[year];
@@ -283,7 +235,7 @@ map.on('load', function() {
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ff8767;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
+            .setHTML('<h3 style = "color: #ced1cc;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
             .addTo(map);
 
     });
@@ -301,12 +253,12 @@ map.on('load', function() {
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ced1cc;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
+            .setHTML('<h3 style = "color: #ff8767;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
             .addTo(map);
 
     });
 
-    map.on('mouseenter', 'planned1', function(e) {
+    map.on('mouseenter', 'construction', function(e) {
         map.getCanvas().style.cursor = 'pointer';
 
         var coordinates = e.features[0].geometry.coordinates.slice();
@@ -324,7 +276,7 @@ map.on('load', function() {
 
     });
 
-    map.on('mouseenter', 'planned2', function(e) {
+    map.on('mouseenter', 'planned', function(e) {
         map.getCanvas().style.cursor = 'pointer';
 
         var coordinates = e.features[0].geometry.coordinates.slice();
@@ -337,46 +289,11 @@ map.on('load', function() {
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #dd54b6;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
+            .setHTML('<h3 style = "color: #a45edb;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
             .addTo(map);
 
     });
 
-    map.on('mouseenter', 'planned3', function(e) {
-        map.getCanvas().style.cursor = 'pointer';
-
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var name = e.features[0].properties.plant;
-        var capacity = e.features[0].properties.capacity;
-        var coalType = e.features[0].properties.coalType;
-
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #dd54b6;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
-            .addTo(map);
-
-    });
-
-    map.on('mouseenter', 'planned4', function(e) {
-        map.getCanvas().style.cursor = 'pointer';
-
-        var coordinates = e.features[0].geometry.coordinates.slice();
-        var name = e.features[0].properties.plant;
-        var capacity = e.features[0].properties.capacity;
-        var coalType = e.features[0].properties.coalType;
-
-        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-        }
-
-        popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #dd54b6;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
-            .addTo(map);
-
-    });
 
     map.on('mouseleave', 'powerplants', function() {
 
@@ -399,28 +316,14 @@ map.on('load', function() {
 
     });
 
-    map.on('mouseleave', 'planned1', function() {
+    map.on('mouseleave', 'construction', function() {
 
         map.getCanvas().style.cursor = '';
         popup.remove();
 
     });
 
-    map.on('mouseleave', 'planned2', function() {
-
-        map.getCanvas().style.cursor = '';
-        popup.remove();
-
-    });
-
-    map.on('mouseleave', 'planned3', function() {
-
-        map.getCanvas().style.cursor = '';
-        popup.remove();
-
-    });
-
-    map.on('mouseleave', 'planned4', function() {
+    map.on('mouseleave', 'planned', function() {
 
         map.getCanvas().style.cursor = '';
         popup.remove();
