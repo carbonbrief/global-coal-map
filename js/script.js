@@ -211,14 +211,37 @@ map.on('load', function() {
         year = document.getElementById('slider').value;
 
         // update filter
-        filterRegion = ['==', ['string', ['get', 'regionLabel']], dropdown];
-
+        if (dropdown == "All") {
+            filterRegion = ['!=', ['string', ['get', 'regionLabel']], "placeholder"];
+        } else {
+            filterRegion = ['==', ['string', ['get', 'regionLabel']], dropdown];
+        }
+        
         // update the map
         map.setFilter('operating', ['all', filterOperating, filterOperating2, filterRegion]); //the filter only applies to the operating layer
         map.setFilter('closing', ['all', filterClosing, filterRegion]);
         map.setFilter('new', ['all', filterNew, filterRegion]);
         map.setFilter('construction', ['all', filterFuture, filterConstruction, filterRegion]);
         map.setFilter('planned', ['all', filterFuture, filterPlanned, filterRegion]);
+
+        // zoom to filtered markers
+        if (dropdown == "All") {
+            map.fitBounds([[-126.61, -58.18], [133.12, 70.23]]);
+        } else if (dropdown == "China") {
+            map.fitBounds([[56.35, 15.71], [145.99, 52.75]]);
+        } else if (dropdown == "EU28") {
+            map.fitBounds([[-31.05, 30.07], [43.47, 51.50]]);
+        } else if (dropdown == "Former USSR") {
+            map.fitBounds([[-8.90, 24.77], [133.12, 70.23]]);
+        } else if (dropdown == "India") {
+            map.fitBounds([[54.24, 2.2], [100.64, 32.92]]);
+        } else if (dropdown == "Other") {
+            map.fitBounds([[-126.61, -58.18], [133.12, 70.23]]);
+        } else if (dropdown == "Other Asia") {
+            map.fitBounds([[65.97, -21.35], [159.14, 46.26]]);
+        } else {
+            // do nothing
+        }
 
     });
 
