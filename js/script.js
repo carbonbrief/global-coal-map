@@ -2,7 +2,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2lqbmpqazdlMDBsdnRva284c
 
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/rospearce/cjhc2iqbv0out2rt6soygg2vm',
+    style: 'https://openmaptiles.github.io/dark-matter-gl-style/style-cdn.json',
     center: [8, 10],
     zoom: 1.5
 });
