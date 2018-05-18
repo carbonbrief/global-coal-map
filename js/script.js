@@ -40,25 +40,13 @@ map.on('load', function() {
 
     var year = 2017;
 
-    // // filters for year
-
-    // // plants about to close, which start before 2018
-    // var filterYear1 = ['all', ['==', ['number', ['get', 'year2']], (year)], ['<', ['number', ['get', 'year1']], 2018]];
-    // // main plants, which start before 2018. All = logical AND
-    // var filterYear2 = ['all', ['<', ['number', ['get', 'year1']], year], ['>', ['number', ['get', 'year2']], year], ['<', ['number', ['get', 'year1']], 2018] ];
-    // //var filterEndYear2 = ['>', ['number', ['get', 'year2']], year];
-    // // plants newly opened, which start before 2018
-    // var filterYear3 = ['all', ['==', ['number', ['get', 'year1']], year], ['<', ['number', ['get', 'year1']], 2018] ];
-    // // filter for plants planned, ie. which start after 2018
-    // var filterYear4 = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
-
     // FILTERS
 
     // grab plants where the start year equals either start1 OR start 2
     var filterNew = ['any', ['==', ['number', ['get', 'start1']], year], ['==', ['number', ['get', 'start2']], year] ];
 
-    // grab plants where the retire year is the year BEFORE closing
-    var filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year-1)], ['==', ['number', ['get', 'retire2']], (year-1)] ];
+    // grab plants where the year is the year BEFORE the retire year
+    var filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)] ];
 
     // FUTURE
     // filter for construction
@@ -70,9 +58,9 @@ map.on('load', function() {
     var filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
 
     // OPERATIONAL
-    // grab plants that don't fit into any of the other categories
-    var filterOperating = ['none', ['==', ['number', ['get', 'start1']], year], ['==', ['number', ['get', 'start2']], year], ['==', ['number', ['get', 'retire1']], (year-1)], ['==', ['number', ['get', 'retire2']], (year-1)], ['==', ['string', ['get', 'status']], 'Construction'], ['==', ['string', ['get', 'status']], 'Permitted'], ['==', ['string', ['get', 'status']], 'Pre-permit'], ['==', ['string', ['get', 'status']], 'Announced'] ];
-    // link to slider
+    // grab plants that don't fit into closing or new categories
+    var filterOperating = ['all', ['!=', ['number', ['get', 'start1']], year], ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)]];
+    // link to slider and make sure that not planned
     // ensure that the slider year is between year1 and year2, and that it doesn't begin after 2018. using less then or equal operator because the filter above will remove those that need to be coloured for new or closing
     var filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['<', ['number', ['get', 'year1']], 2018] ];
 
@@ -191,24 +179,20 @@ map.on('load', function() {
 
       // update hour filter when the slider is dragged
     document.getElementById('slider').addEventListener('input', function(e) {
+
         year = parseInt(e.target.value);
-        // update the map filters
-        // filterYear1 = ['all', ['==', ['number', ['get', 'year2']], year], ['<', ['number', ['get', 'year1']], 2018]];
-        // filterYear2 = ['all', ['<', ['number', ['get', 'year1']], year], ['>', ['number', ['get', 'year2']], year] ];
-        // filterYear3 = ['all', ['==', ['number', ['get', 'year1']], year], ['<', ['number', ['get', 'year1']], 2018] ];
-        // filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
+        
         // update any map filters containing the variable year
         var filterNew = ['any', ['==', ['number', ['get', 'start1']], year], ['==', ['number', ['get', 'start2']], year] ];
-        var filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year-1)], ['==', ['number', ['get', 'retire2']], (year-1)] ];
+        var filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)] ];
         var filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
-        var filterOperating = ['none', ['==', ['number', ['get', 'start1']], year], ['==', ['number', ['get', 'start2']], year], ['==', ['number', ['get', 'retire1']], (year-1)], ['==', ['number', ['get', 'retire2']], (year-1)], ['==', ['string', ['get', 'status']], 'Construction'], ['==', ['string', ['get', 'status']], 'Permitted'], ['==', ['string', ['get', 'status']], 'Pre-permit'], ['==', ['string', ['get', 'status']], 'Announced'] ];
+        var filterOperating = ['all', ['!=', ['number', ['get', 'start1']], year], ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)]];
         var filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['<', ['number', ['get', 'year1']], 2018] ];
 
         // update the map
         map.setFilter('operating', ['all', filterOperating, filterOperating2]); //the filter only applies to the operating layer
         map.setFilter('closing', ['all', filterClosing]);
         map.setFilter('new', ['all', filterNew]);
-        // four different layers for the different planned opacities
         map.setFilter('construction', ['all', filterFuture, filterConstruction]);
         map.setFilter('planned', ['all', filterFuture, filterPlanned]);
   
