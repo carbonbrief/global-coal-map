@@ -283,7 +283,7 @@ map.on('load', function() {
         // Populate the popup and set its coordinates
         // based on the feature found.
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ffc83e;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + '</b></p>')
+            .setHTML('<h3 style = "color: #ffc83e;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + ' years</b></p>')
             .addTo(map);
 
     });
@@ -305,7 +305,7 @@ map.on('load', function() {
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ced1cc;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + '</b></p>')
+            .setHTML('<h3 style = "color: #ced1cc;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + ' years</b></p>')
             .addTo(map);
 
     });
@@ -327,7 +327,7 @@ map.on('load', function() {
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ff8767;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + '</b></p>')
+            .setHTML('<h3 style = "color: #ff8767;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + ' years</b></p>')
             .addTo(map);
 
     });
