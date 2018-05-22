@@ -261,11 +261,17 @@ map.on('load', function() {
         // Change the cursor style as a UI indicator.
         map.getCanvas().style.cursor = 'pointer';
 
+        
+
         var coordinates = e.features[0].geometry.coordinates.slice();
         var name = e.features[0].properties.plant;
         var capacity = e.features[0].properties.capacity;
         var coalType = e.features[0].properties.coalType;
         var yearOpened = e.features[0].properties.startLabel;
+
+        year = document.getElementById('slider').value;
+        var firstStart = e.features[0].properties.start1;
+
 
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
@@ -277,7 +283,7 @@ map.on('load', function() {
         // Populate the popup and set its coordinates
         // based on the feature found.
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ffc83e;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p>')
+            .setHTML('<h3 style = "color: #ffc83e;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + '</b></p>')
             .addTo(map);
 
     });
@@ -291,12 +297,15 @@ map.on('load', function() {
         var coalType = e.features[0].properties.coalType;
         var yearOpened = e.features[0].properties.startLabel;
 
+        year = document.getElementById('slider').value;
+        var firstStart = e.features[0].properties.start1;
+
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ced1cc;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p>')
+            .setHTML('<h3 style = "color: #ced1cc;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + '</b></p>')
             .addTo(map);
 
     });
@@ -310,12 +319,15 @@ map.on('load', function() {
         var coalType = e.features[0].properties.coalType;
         var yearOpened = e.features[0].properties.startLabel;
 
+        year = document.getElementById('slider').value;
+        var firstStart = e.features[0].properties.start1;
+
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ff8767;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p>')
+            .setHTML('<h3 style = "color: #ff8767;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + '</b></p>')
             .addTo(map);
 
     });
@@ -334,7 +346,7 @@ map.on('load', function() {
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #dd54b6;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p>')
+            .setHTML('<h3 style = "color: #dd54b6;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
             .addTo(map);
 
     });
@@ -353,7 +365,7 @@ map.on('load', function() {
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #a45edb;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p>')
+            .setHTML('<h3 style = "color: #a45edb;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
             .addTo(map);
 
     });
