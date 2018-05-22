@@ -1,4 +1,6 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2lqbmpqazdlMDBsdnRva284cWd3bm11byJ9.V6Hg2oYJwMAxeoR9GEzkAA';
+var bounds = [
+    [ -160, -60],[178, 80]
+]
 
 var map = new mapboxgl.Map({
     container: 'map',
@@ -9,6 +11,9 @@ var map = new mapboxgl.Map({
 
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
+
+// resize map for the screen
+map.fitBounds(bounds, {padding: 20});
 
 // store an array to convert 2018 to 'planned'
 var getYear = {
