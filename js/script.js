@@ -41,8 +41,8 @@ map.on('load', function() {
     // FILTERS
 
     // NEW
-    // grab plants where the start year equals EITHER start1 OR start 2
-    var filterNew = ['any', ['==', ['number', ['get', 'start1']], year], ['==', ['number', ['get', 'start2']], year] ];
+    // grab plants where the start year equals start 2...don't use start1 or all different units will show at once
+    var filterNew = ['==', ['number', ['get', 'start2']], year];
     
     // CLOSING
     // grab plants where the slider year is the year BEFORE EITHER retire year
@@ -59,7 +59,7 @@ map.on('load', function() {
 
     // OPERATIONAL
     // grab plants that don't fit into closing or new categories
-    var filterOperating = ['all', ['!=', ['number', ['get', 'start1']], year], ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)]];
+    var filterOperating = ['all', ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)]];
     // link to slider and make sure that not planned
     // ensure that the slider year is between year1 and year2, and that it doesn't begin after 2018. using less then or equal operator because the filter above will remove those that need to be coloured for new or closing
     var filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['<', ['number', ['get', 'year1']], 2018] ];
@@ -186,10 +186,10 @@ map.on('load', function() {
         year = parseInt(e.target.value);
         
         // update any map filters containing the variable year
-        filterNew = ['any', ['==', ['number', ['get', 'start1']], year], ['==', ['number', ['get', 'start2']], year] ];
+        filterNew = ['==', ['number', ['get', 'start2']], year];
         filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)] ];
         filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
-        filterOperating = ['all', ['!=', ['number', ['get', 'start1']], year], ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)]];
+        filterOperating = ['all', ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)]];
         filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['<', ['number', ['get', 'year1']], 2018] ];
 
         // update the map
