@@ -4,7 +4,7 @@ var bounds = [
 
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'https://openmaptiles.github.io/dark-matter-gl-style/style-cdn.json',
+    style: './data/dark-matter.json',
     center: [8, 10],
     zoom: 1.5
 });
