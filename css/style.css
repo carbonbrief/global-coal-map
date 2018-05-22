@@ -62,7 +62,8 @@ a {
 
 .row {
   height: 12px;
-  width: 100%;
+  /* extra 25 off to stop it from showing when the toggle is operated */
+  width: calc(100% - 25px);
 }
 
 p {

@@ -265,6 +265,7 @@ map.on('load', function() {
         var name = e.features[0].properties.plant;
         var capacity = e.features[0].properties.capacity;
         var coalType = e.features[0].properties.coalType;
+        var yearOpened = e.features[0].properties.startLabel;
 
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
@@ -276,7 +277,7 @@ map.on('load', function() {
         // Populate the popup and set its coordinates
         // based on the feature found.
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ffc83e;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
+            .setHTML('<h3 style = "color: #ffc83e;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p>')
             .addTo(map);
 
     });
@@ -288,13 +289,14 @@ map.on('load', function() {
         var name = e.features[0].properties.plant;
         var capacity = e.features[0].properties.capacity;
         var coalType = e.features[0].properties.coalType;
+        var yearOpened = e.features[0].properties.startLabel;
 
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ced1cc;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
+            .setHTML('<h3 style = "color: #ced1cc;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p>')
             .addTo(map);
 
     });
@@ -306,13 +308,14 @@ map.on('load', function() {
         var name = e.features[0].properties.plant;
         var capacity = e.features[0].properties.capacity;
         var coalType = e.features[0].properties.coalType;
+        var yearOpened = e.features[0].properties.startLabel;
 
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ff8767;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
+            .setHTML('<h3 style = "color: #ff8767;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p>')
             .addTo(map);
 
     });
@@ -324,13 +327,14 @@ map.on('load', function() {
         var name = e.features[0].properties.plant;
         var capacity = e.features[0].properties.capacity;
         var coalType = e.features[0].properties.coalType;
+        var yearOpened = e.features[0].properties.startLabel;
 
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #dd54b6;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
+            .setHTML('<h3 style = "color: #dd54b6;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p>')
             .addTo(map);
 
     });
@@ -342,13 +346,14 @@ map.on('load', function() {
         var name = e.features[0].properties.plant;
         var capacity = e.features[0].properties.capacity;
         var coalType = e.features[0].properties.coalType;
+        var yearOpened = e.features[0].properties.startLabel;
 
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #a45edb;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p>')
+            .setHTML('<h3 style = "color: #a45edb;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p>')
             .addTo(map);
 
     });
@@ -399,3 +404,11 @@ $(document).ready(function () {
         $(this).val($(this).find('option[selected]').val());
     });
 })
+
+// TOGGLE BUTTON
+
+$(".toggle").click(function() {
+    $("#console").toggleClass('console-close console-open');
+    $('.arrow-right-hidden').toggleClass('arrow-right');
+    $('.arrow-left').toggleClass('arrow-left-hidden');
+});

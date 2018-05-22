@@ -1,0 +1,58 @@
+#console-toggle {
+    right: 0px;
+    top: 0px;
+    padding: 10px;
+    position: absolute;
+    z-index: 99999999;
+    width: 12px;
+    height: 12px;
+    display: block;
+}
+  
+.toggle {
+    color: #878787;
+    text-decoration: none;
+    text-align: right;
+}
+  
+.toggle:hover {
+    color: #f3f3f3;
+}
+  
+.arrow-right-hidden {
+    display: none;
+}
+  
+.arrow-left {
+    display: inline;
+}
+  
+.arrow-left-hidden {
+    display: none;
+}
+  
+.arrow-right {
+    display: inline;
+}
+
+.console-close {
+    transform: translateX(calc(-100% + 25px));
+    -ms-transform: translateX(calc(-100% + 25px));
+    -webkit-transform: translateX(calc(-100% + 25px));
+    transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s;
+    transition-property: transform;
+    -webkit-transition-property: transform;
+    -moz-transition-property: transform;
+}
+
+.console-open {
+    transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+    transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s;
+    transition-property: transform;
+    -webkit-transition-property: transform;
+    -moz-transition-property: transform;
+}
