@@ -31,6 +31,12 @@ var svg = d3.select("#line-chart").append("svg")
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+var svg2 = d3.select("#line-chart-background").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 var div = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
@@ -39,6 +45,8 @@ var yearFormat = d3.timeFormat("%Y");
 
 var decimalFormat = d3.format(".1f");
 
+// data for background trace lines
+var allData = {"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non-EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
 // powerplants to be shown
 var filterData={"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non-EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
 
@@ -153,19 +161,6 @@ function drawChart(filterData){
         .attr("class", "line")
         .attr("d", function(d) { return line(d.values); })
         .style("stroke", function(d) { return color(d.name); });
-        // .style("stroke-dasharray", function (d) {
-        //     // quite a hacky way of getting the planned section of the chart to be dashed without having to filter data or add new lines
-        //     // split into if/else statement because the lines are different lengths
-        //     if (d.name == "Coal") {
-        //         return "420,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3"
-        //     } else if (d.name == "Hydro" || d.name == "Other" || d.name == "Solar" || d.name == "Waste") {
-        //         return "310,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3"
-        //     } else if (d.name == "Gas") {
-        //         return "415,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3"
-        //     } else {
-        //         return "315,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3"
-        //     }
-        // });
 
         // ADD DOTS WITH TOOLTIP
 
@@ -253,7 +248,77 @@ function drawChart(filterData){
 
 }
 
-drawChart(filterData); // draw initial chart
+// FUNCTION TO DRAW TRACE LINES
+
+function drawBackground(allData) {
+    d3.csv("./data/line.csv", function(error, data) {
+
+        color.domain(d3.keys(data[0]).filter(function(key) { return key !== "year"; }));
+
+        data.forEach(function(d) {
+            d.year = parseDate(d.year);
+        });
+
+        var powerplants2 = color.domain().map(function(name) {
+            return {
+            name: name,
+            values: data.map(function(d) {
+                return {
+                    year: d.year, 
+                    capacity: +d[name]
+                };
+            })
+            };
+        });
+    
+        // extend x domain of line chart so that bars align
+
+        x.domain([
+
+            parseDate2(19990701), parseDate2(20170701)
+
+        ]);
+
+        y.domain([
+
+            d3.min(powerplants2, function(c) { return d3.min(c.values, function(v) { return v.capacity; }); }),
+            d3.max(powerplants2, function(c) { return d3.max(c.values, function(v) { return v.capacity; }); })
+
+        ]);
+
+        svg2.selectAll("*").remove();
+
+        var boo2 =powerplants2.filter(function(d){return allData[d.name]==true;});
+        console.log("filter");
+        console.log(boo2);
+    
+        var plant2 = svg2.selectAll(".plant-background")
+        .data(powerplants2.filter(function(d){return allData[d.name]==true;}))
+        .enter().append("g");
+        
+        console.log(plant2);
+
+        svg2.selectAll(".plant-background")
+        .data(powerplants2.filter(function(d){return allData[d.name]==true;}))
+        .append("g")
+        .attr("class", "plant-background");
+        
+        svg2.selectAll(".plant-background")
+        .data(powerplants2.filter(function(d){return allData[d.name]==true;}))
+        .exit()
+        .remove();
+    
+        plant2.append("path")
+        .attr("class", "background-line")
+        .attr("d", function(d) { return line(d.values); });
+
+    });
+}
+
+// draw initial chart
+
+drawBackground(allData);
+drawChart(filterData);
 
 // LINK CHART TO DROPDOWN
 
@@ -266,5 +331,6 @@ function reDraw(region){
     }
 	console.log("redraw :");
 	console.log(filterData);
-	drawChart(filterData);
+    drawChart(filterData);
+    
 }

@@ -3,6 +3,19 @@
     height: 300px;
 }
 
+#line-chart {
+    position: absolute;
+    z-index: 9999;
+}
+
+#line-chart-background {
+    position: absolute;
+}
+
+#bar-chart {
+    position: absolute;
+}
+
 .plant.label {
     font-size: 12.5px;
   }
@@ -11,6 +24,13 @@
     fill: none;
     stroke: steelblue;
     stroke-width: 1.5px;
+}
+
+.background-line {
+    fill: none;
+    stroke: #ffc83e;
+    stroke-width: 0.8px;
+    opacity: 0.25;
 }
   
 .label {
