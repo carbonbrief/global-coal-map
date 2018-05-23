@@ -12,11 +12,16 @@ var map = new mapboxgl.Map({
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
-map.addControl(new mapboxgl.GeolocateControl({
-    fitBoundsOptions: {
-        maxZoom: 5
-    }
-}));
+var screenWidth = $(window).width();
+
+// only include geolocate control on larger screens, to reduce clutter
+if (screenWidth > 700) {
+    map.addControl(new mapboxgl.GeolocateControl({
+        fitBoundsOptions: {
+            maxZoom: 5
+        }
+    }));
+}
 
 // resize map for the screen
 map.fitBounds(bounds, {padding: 20});
