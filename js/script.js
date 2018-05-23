@@ -232,6 +232,8 @@ map.on('load', function() {
         // zoom to filtered markers
         if (dropdown == "All") {
             map.fitBounds([[-126.61, -58.18], [133.12, 70.23]]);
+        } else if (dropdown == "Africa and Middle East") {
+            map.fitBounds([[-19.69, -36.61], [64.43, 47.09]]);
         } else if (dropdown == "China") {
             map.fitBounds([[56.35, 15.71], [145.99, 52.75]]);
         } else if (dropdown == "EU28") {
@@ -240,10 +242,16 @@ map.on('load', function() {
             map.fitBounds([[-8.90, 24.77], [133.12, 70.23]]);
         } else if (dropdown == "India") {
             map.fitBounds([[54.24, 2.2], [100.64, 32.92]]);
+        } else if (dropdown == "Latin America") {
+            map.fitBounds([[-110.16, -56.69], [-30.0, 24.06]]);
+        } else if (dropdown == "Non-EU Europe") {
+            map.fitBounds([[-0.41, 30.56], [47.68, 52.34]]);
         } else if (dropdown == "Other") {
             map.fitBounds([[-126.61, -58.18], [133.12, 70.23]]);
         } else if (dropdown == "Other Asia") {
             map.fitBounds([[65.97, -21.35], [159.14, 46.26]]);
+        } else if (dropdown == "United States") {
+            map.fitBounds([[-142.66, 19.40], [-56.38, 49.67]]);
         } else {
             // do nothing
         }
@@ -283,7 +291,7 @@ map.on('load', function() {
         // Populate the popup and set its coordinates
         // based on the feature found.
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ffc83e;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + ' years</b></p>')
+            .setHTML('<h3 style = "color: #ffc83e;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + ' year(s)</b></p>')
             .addTo(map);
 
     });
@@ -305,7 +313,7 @@ map.on('load', function() {
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ced1cc;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + ' years</b></p>')
+            .setHTML('<h3 style = "color: #ced1cc;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + ' year(s)</b></p>')
             .addTo(map);
 
     });
@@ -327,7 +335,7 @@ map.on('load', function() {
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ff8767;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + ' years</b></p>')
+            .setHTML('<h3 style = "color: #ff8767;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + ' year(s)</b></p>')
             .addTo(map);
 
     });
