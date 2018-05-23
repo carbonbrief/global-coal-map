@@ -12,6 +12,12 @@ var map = new mapboxgl.Map({
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
+map.addControl(new mapboxgl.GeolocateControl({
+    fitBoundsOptions: {
+        maxZoom: 5
+    }
+}));
+
 // resize map for the screen
 map.fitBounds(bounds, {padding: 20});
 
@@ -90,7 +96,7 @@ map.on('load', function() {
             ]
           },
       'circle-color': '#ced1cc',
-      'circle-opacity': 0.45
+      'circle-opacity': 0.5
         },
         'filter': ['all', filterClosing, filterRegion]
    })
@@ -112,7 +118,7 @@ map.on('load', function() {
                 ]
               },
           'circle-color': '#ffc83e',
-          'circle-opacity': 0.45
+          'circle-opacity': 0.5
         },
         'filter': ['all', filterOperating, filterOperating2, filterRegion]    // filter for start and end year AND make sure that start year is less than 2018 (filterYear5)
       });
@@ -134,7 +140,7 @@ map.on('load', function() {
                 ]
               },
           'circle-color': '#ff8767',
-          'circle-opacity': 0.45
+          'circle-opacity': 0.5
             },
             'filter': ['all', filterNew, filterRegion]
        })
@@ -156,7 +162,7 @@ map.on('load', function() {
                 ]
               },
           'circle-color': '#a45edb',
-          'circle-opacity': 0.35
+          'circle-opacity': 0.5
             },
             'filter': ['all', filterFuture, filterPlanned, filterRegion] 
        })
@@ -178,7 +184,7 @@ map.on('load', function() {
                 ]
               },
           'circle-color': '#dd54b6',
-          'circle-opacity': 0.45
+          'circle-opacity': 0.5
             },
         'filter': ['all', filterFuture, filterConstruction, filterRegion] 
        })
