@@ -1,6 +1,6 @@
 // set the dimensions and margins of the graph
-var margin = {top: 18, right: 40, bottom: 30, left: 45},
-    width = 450 - margin.left - margin.right,
+var margin = {top: 18, right: 15, bottom: 30, left: 45},
+    width = parseInt(d3.select("#line-wrapper").style("width")) - margin.left - margin.right,
     height = 302 - margin.top - margin.bottom;
 
 // different names to line chart
@@ -15,6 +15,7 @@ var y3 = d3.scaleLinear()
 // append the svg object to the body of the page. need to do it only once for the line and bar background
 
 var svg3 = d3.select("#bar-chart").append("svg")
+    .attr("id", "svg-3")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")

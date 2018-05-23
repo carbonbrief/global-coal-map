@@ -10,12 +10,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="//d3js.org/d3.v4.min.js"></script>
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.1/mapbox-gl.css' rel='stylesheet' />
-        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/charts.css">
+        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/toggle.css">
     </head>
     <body>
-        <div id='map'></div>
+        
         <div id='console' class='console-open'>
             <div id="console-toggle">
                     <a href="#" class="toggle"><span class="arrow-right-hidden">&#10095;</span><span class="arrow-left">&#10094;</span></a>
@@ -66,7 +66,7 @@
                     <option value='United States' >US</option>
                 </select>
             </div>
-            <div class="session">
+            <div class="session" id="charts">
                 <div id="line-wrapper">
                     <div id="bar-chart"></div>
                     <div id="line-chart-background"></div>
@@ -74,6 +74,7 @@
                 </div>
             </div>
         </div>
+        <div id='map'></div>
         <div id='loading'>
             <div id="canvas-wrapper">
                 <canvas id="canvas-id" width="120" height="120"> </canvas>

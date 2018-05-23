@@ -1,5 +1,6 @@
-var margin = {top: 20, right: 40, bottom: 30, left: 45},
-    width = 450 - margin.left - margin.right,
+var margin = {top: 20, right: 15, bottom: 30, left: 45},
+    // calculate the width of the chart from the width of the line-wrapper
+    width = parseInt(d3.select("#line-wrapper").style("width")) - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;
 
 var parseDate = d3.timeParse("%Y");
@@ -26,12 +27,14 @@ var line = d3.line()
     .y(function(d) { return y(d.capacity); });
 
 var svg = d3.select("#line-chart").append("svg")
+    .attr("id", "svg-1")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 var svg2 = d3.select("#line-chart-background").append("svg")
+    .attr("id", "svg-2")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -334,3 +337,17 @@ function reDraw(region){
     drawChart(filterData);
     
 }
+
+// resize graphs for different window sizes. Work for refresh but not resize
+
+$(window).on("resize", function () {
+
+    var width = parseInt(d3.select("#line-wrapper").style("width")) - margin.left - margin.right;
+
+    d3.select("#line-chart").select("#svg-1").attr("width", width + margin.left + margin.right);
+
+    d3.select("#line-chart").select("#svg-2").attr("width", width + margin.left + margin.right);
+
+    d3.select("#bar-chart").select("#svg-3").attr("width", width + margin.left + margin.right);
+
+});
