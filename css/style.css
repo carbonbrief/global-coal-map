@@ -9,7 +9,7 @@ body {
   top: 0;
   bottom: 0;
   width: 100%;
-  height: 770px;
+  height: 800px;
 }
   
 h1 {
@@ -380,7 +380,7 @@ li {
 @media screen and (max-width: 380px) {
 
   #logo-mobile {
-    top: 515px;
+    top: 510px;
   }
 
   #map {
