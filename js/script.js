@@ -66,8 +66,8 @@ map.on('load', function() {
     // grab plants that don't fit into closing or new categories
     var filterOperating = ['all', ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)]];
     // link to slider and make sure that not planned
-    // ensure that the slider year is between year1 and year2, and that it doesn't begin after 2018. using less then or equal operator because the filter above will remove those that need to be coloured for new or closing
-    var filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['<', ['number', ['get', 'year1']], 2018] ];
+    // ensure that the slider year is between year1 and year2, and that it is operating. using less then or equal operator because the filter above will remove those that need to be coloured for new or closing
+    var filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['==', ['string', ['get', 'status']], "Operating"] ];
 
     // set up filter for region
     var filterRegion = ['!=', ['string', ['get','regionLabel']], 'placeholder'];
@@ -195,7 +195,7 @@ map.on('load', function() {
         filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)] ];
         filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
         filterOperating = ['all', ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)]];
-        filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['<', ['number', ['get', 'year1']], 2018] ];
+        filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['==', ['string', ['get', 'status']], "Operating"] ];
 
         // update the map
         map.setFilter('operating', ['all', filterOperating, filterOperating2, filterRegion]); //the filter only applies to the operating layer
