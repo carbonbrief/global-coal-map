@@ -181,7 +181,7 @@ li {
 
 #logo-mobile {
   position: absolute;
-  top: 515px;
+  top: 592px;
   right: 9px;
   z-index: 9000;
   height: 25px;
@@ -220,7 +220,7 @@ li {
 
 /* make responsive */
 
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1300px) {
 
   #console {
     width: 400px;
@@ -255,7 +255,7 @@ li {
   }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1100px) {
 
   #console {
     width: 350px;
@@ -269,9 +269,9 @@ li {
     height: 35px;
   }
 
-  #map {
-    height: 655px;
-  }
+}
+
+@media screen and (max-width: 1024px) {
 
   #logo-tablet {
     visibility: visible;
@@ -281,9 +281,38 @@ li {
     visibility: hidden;
   }
 
+  #map {
+    height: 655px;
+  }
+
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 980px) {
+
+  #console {
+    width: 300px;
+  }
+
+  #line-wrapper {
+    width: 300px;
+  }
+
+  h1 {
+    font-size: 24px;
+    line-height: 26px;
+  }
+
+  h2 {
+    font-size: 14px;
+  }
+
+  .console-text {
+    font-size: 13.5px;
+  }
+
+}
+
+@media screen and (max-width: 850px) {
   #charts {
     display: none;
   }
@@ -299,26 +328,12 @@ li {
   #key {
     height: 25px;
   }
-  h1 {
-    font-size: 24px;
-    line-height: 26px;
-  }
-
-  h2 {
-    font-size: 14px;
-  }
-
-  .console-text {
-    font-size: 13.5px;
-  }
 
   .row{
     height: 10px;
     width: calc(100% - 15px);
   }
-}
 
-@media screen and (max-width: 700px) {
   .console-text {
     display: none;
   }
@@ -330,10 +345,6 @@ li {
     /* move as mapbox credit changes */
     top: 588px;
   }
-
-}
-
-@media screen and (max-width: 480px) {
 
   #console {
     width: 100%;
@@ -348,9 +359,13 @@ li {
   }
 
   #map {
-    height: 390px;
     position: relative;
+    height: 470px;
   }
+
+}
+
+@media screen and (max-width: 480px) {
 
   #logo-tablet {
     visibility: hidden;
@@ -365,7 +380,7 @@ li {
 @media screen and (max-width: 380px) {
 
   #logo-mobile {
-    top: 510px;
+    top: 515px;
   }
 
   #map {
