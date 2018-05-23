@@ -26,6 +26,10 @@
     stroke-width: 1.5px;
 }
 
+.bar {
+    fill: rgba(0,0,0,0.2);
+}
+
 .background-line {
     fill: none;
     stroke: #ffc83e;
@@ -67,16 +71,16 @@ opacity: 0.3;
 }
 
 div.tooltip {
-position: absolute;
-max-width: 150px;
-padding: 7px;
-font-size: 12.5px;
-background: #242a3a;
-color: #f3f3f3;
-border: 0px;
-border-radius: 4px;
-pointer-events: none;
-z-index: 999999;
+    position: absolute;
+    max-width: 150px;
+    padding: 7px;
+    font-size: 12.5px;
+    background: #383838;
+    color: #f3f3f3;
+    border: 0px;
+    border-radius: 4px;
+    pointer-events: none;
+    z-index: 999999;
 }
 
 div.tooltip p {

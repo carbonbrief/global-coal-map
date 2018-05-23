@@ -43,7 +43,7 @@ var div = d3.select("body").append("div")
 
 var yearFormat = d3.timeFormat("%Y");
 
-var decimalFormat = d3.format(".1f");
+var decimalFormat = d3.format(",.0f");
 
 // data for background trace lines
 var allData = {"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non-EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
