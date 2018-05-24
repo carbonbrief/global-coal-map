@@ -159,7 +159,7 @@ function addDataLayers() {
                       [6720, 30]
                     ]
                   },
-              'circle-color': '#ffc83e',
+              'circle-color': '#ffc23b',
               'circle-opacity': 0.5
             },
             'filter': ['all', filterOperating, filterOperating2, filterRegion]    // filter for start and end year AND make sure that start year is less than 2018 (filterYear5)
@@ -181,7 +181,7 @@ function addDataLayers() {
                       [6720, 30]
                     ]
                   },
-              'circle-color': '#ff8767',
+              'circle-color': '#f97b62',
               'circle-opacity': 0.5
                 },
                 'filter': ['all', filterNew, filterRegion]
