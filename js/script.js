@@ -34,11 +34,33 @@ var baseLayers = [{
     label: 'Dark',
     id: 'https://openmaptiles.github.io/dark-matter-gl-style/style-cdn.json'
   }, {
-    label: 'Terrain',
-    id: 'http://osm-liberty.lukasmartinelli.ch/style.json'
-  }, {
-    label: '3D buildings',
+    label: 'Light',
     id: 'https://openmaptiles.github.io/klokantech-3d-gl-style/style-cdn.json'
+  },{
+    label: "Satellite",
+    id: {
+        "version": 8,
+        "sources": {
+            "simple-tiles": {
+                "type": "raster",
+                // point to our third-party tiles. Note that some examples
+                // show a "url" property. This only applies to tilesets with
+                // corresponding TileJSON (such as mapbox tiles). 
+                "tiles": [
+                    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                ],
+                "tileSize": 256,
+                attribution: 'Imagery provided by services from the Global Imagery Browse Services (GIBS), operated by the NASA/GSFC/Earth Science Data and Information System (<a href="https://earthdata.nasa.gov">ESDIS</a>) with funding provided by NASA/HQ.'
+            }
+        },
+        "layers": [{
+            "id": "simple-tiles",
+            "type": "raster",
+            "source": "simple-tiles",
+            "minzoom": 0,
+            "maxzoom": 22
+        }]
+    }
 
 }];
 

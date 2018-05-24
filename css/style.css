@@ -54,7 +54,7 @@ a {
   margin: 10px;
   padding: 10px 20px;
   padding-right: 35px;
-  background-color: rgba(78, 78, 78, 0.856);
+  background-color: rgba(78, 78, 78, 0.88);
   border-radius: 5px;
   z-index: 5;
 }
@@ -109,7 +109,7 @@ select {
   outline:0px;
 }
 
-#selectorRegion {
+.selector {
  width: 200px;
 }
 
@@ -205,7 +205,7 @@ li {
 
 #logo-laptop {
   position: absolute;
-  top: 710px;
+  top: 737px;
   right: 0px;
   z-index: 9000;
   height: 45px;
@@ -228,6 +228,10 @@ li {
 
   #line-wrapper {
     width: 400px;
+  }
+
+  .selector {
+    width: 180px;
   }
 
   h1 {
@@ -263,6 +267,10 @@ li {
 
   #line-wrapper {
     width: 350px;
+  }
+
+  .selector {
+    width: 160px;
   }
 
   #key {
