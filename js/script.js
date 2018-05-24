@@ -23,10 +23,26 @@ if (screenWidth > 700) {
     }));
 }
 
+// map.addControl(new MapboxGeocoder({
+//     accessToken: mapboxgl.accessToken
+// }));
+
 // resize map for the screen
 map.fitBounds(bounds, {padding: 20});
 
-// store an array to convert 2018 to 'planned'
+var baseLayers = [{
+    label: 'Dark',
+    id: 'https://openmaptiles.github.io/dark-matter-gl-style/style-cdn.json'
+  }, {
+    label: 'Terrain',
+    id: 'http://osm-liberty.lukasmartinelli.ch/style.json'
+  }, {
+    label: '3D buildings',
+    id: 'https://openmaptiles.github.io/klokantech-3d-gl-style/style-cdn.json'
+
+}];
+
+// store an array to convert 2018 to 'planned' in text label
 var getYear = {
     2000: "2000",
     2001: "2001",
@@ -126,9 +142,9 @@ map.on('load', function() {
           'circle-opacity': 0.5
         },
         'filter': ['all', filterOperating, filterOperating2, filterRegion]    // filter for start and end year AND make sure that start year is less than 2018 (filterYear5)
-      });
+    });
 
-      map.addLayer({
+    map.addLayer({
         id: 'new',
         type: 'circle',
         source: {
@@ -148,9 +164,9 @@ map.on('load', function() {
           'circle-opacity': 0.5
             },
             'filter': ['all', filterNew, filterRegion]
-       })
+    })
 
-       map.addLayer({
+    map.addLayer({
         id: 'planned',
         type: 'circle',
         source: {
@@ -170,9 +186,9 @@ map.on('load', function() {
           'circle-opacity': 0.5
             },
             'filter': ['all', filterFuture, filterPlanned, filterRegion] 
-       })
+    })
 
-       map.addLayer({
+    map.addLayer({
         id: 'construction',
         type: 'circle',
         source: {
@@ -192,11 +208,10 @@ map.on('load', function() {
           'circle-opacity': 0.5
             },
         'filter': ['all', filterFuture, filterConstruction, filterRegion] 
-       })
+    })
 
 
-
-      // update hour filter when the slider is dragged
+    // update hour filter when the slider is dragged
     document.getElementById('slider').addEventListener('input', function(e) {
 
         year = parseInt(e.target.value);
@@ -219,6 +234,7 @@ map.on('load', function() {
         document.getElementById('active-hour').innerText = getYear[year];
     });
 
+    // update map when the region selector is changed
     document.getElementById('selectorRegion').addEventListener('change', function(e) {
 
         // update variables
@@ -268,6 +284,16 @@ map.on('load', function() {
         }
 
     });
+
+    document.getElementById("selectorStyle").addEventListener("change", function(e){
+        // update variables
+        dropdown = e.target.value;
+
+       // get id from array using the dropdown variable
+        var basemap = baseLayers.find(x => x.label === dropdown).id;
+
+        console.log(basemap);
+    })
 
     // Create a popup, but don't add it to the map yet.
     var popup = new mapboxgl.Popup({
@@ -389,7 +415,7 @@ map.on('load', function() {
 
     });
 
-
+    // remove popups on mouseleave
     map.on('mouseleave', 'operating', function() {
 
         map.getCanvas().style.cursor = '';
