@@ -285,25 +285,25 @@ map.on('load', function() {
         if (dropdown == "All") {
             map.fitBounds([[-126.61, -58.18], [133.12, 70.23]]);
         } else if (dropdown == "Africa and Middle East") {
-            map.fitBounds([[-19.69, -36.61], [64.43, 47.09]]);
+            map.fitBounds([[-29.69, -46.61], [54.43, 57.09]]);
         } else if (dropdown == "China") {
-            map.fitBounds([[56.35, 15.71], [145.99, 52.75]]);
+            map.fitBounds([[36.35, 12.71], [145.99, 52.75]]);
         } else if (dropdown == "EU28") {
-            map.fitBounds([[-31.05, 30.07], [43.47, 51.50]]);
+            map.fitBounds([[-51.05, 35], [43.47, 60]]);
         } else if (dropdown == "Former USSR") {
-            map.fitBounds([[-8.90, 24.77], [133.12, 70.23]]);
+            map.fitBounds([[-80, 24.77], [175, 70.23]]);
         } else if (dropdown == "India") {
-            map.fitBounds([[54.24, 2.2], [100.64, 32.92]]);
+            map.fitBounds([[54.24, -5], [80.64, 40]]);
         } else if (dropdown == "Latin America") {
-            map.fitBounds([[-110.16, -56.69], [-30.0, 24.06]]);
+            map.fitBounds([[-140.16, -58], [-70.0, 40]]);
         } else if (dropdown == "Non-EU Europe") {
-            map.fitBounds([[-0.41, 30.56], [47.68, 52.34]]);
+            map.fitBounds([[-10, 30.56], [50, 45]]);
         } else if (dropdown == "Other") {
-            map.fitBounds([[-126.61, -58.18], [133.12, 70.23]]);
+            map.fitBounds([[-179, -70], [170, 88]]);
         } else if (dropdown == "Other Asia") {
-            map.fitBounds([[65.97, -21.35], [159.14, 46.26]]);
+            map.fitBounds([[0, -21.35], [159.14, 56]]);
         } else if (dropdown == "United States") {
-            map.fitBounds([[-142.66, 19.40], [-56.38, 49.67]]);
+            map.fitBounds([[-170.66, 19.40], [-56.38, 55]]);
         } else {
             // do nothing
         }
