@@ -1,4 +1,4 @@
-var margin = {top: 20, right: 15, bottom: 30, left: 45},
+var margin = {top: 10, right: 15, bottom: 30, left: 45},
     // calculate the width of the chart from the width of the line-wrapper
     width = parseInt(d3.select("#line-wrapper").style("width")) - margin.left - margin.right,
     height = 300 - margin.top - margin.bottom;

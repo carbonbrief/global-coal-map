@@ -40,7 +40,7 @@ h3 {
   font-family: 'PT Serif';
   font-style: italic;
   font-size: 15px;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
 }
 
 a {
@@ -91,10 +91,6 @@ p {
 
 #key {
   height: 25px;
-}
-
-#dropdown {
-  height: 50px;
 }
 
 select {
@@ -303,6 +299,10 @@ li {
 
   #line-wrapper {
     width: 300px;
+  }
+
+  .selector {
+    width: 140px;
   }
 
   h1 {
