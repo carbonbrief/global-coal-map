@@ -1,5 +1,5 @@
 var bounds = [
-    [ -160, -60],[178, 80]
+    [ -170, -70],[178, 80]
 ]
 
 var map = new mapboxgl.Map({
@@ -501,3 +501,16 @@ $(".toggle").click(function() {
     $('.arrow-right-hidden').toggleClass('arrow-right');
     $('.arrow-left').toggleClass('arrow-left-hidden');
 });
+
+// sidebar open transitions appears after the loading message has finished above a certain screen size 
+
+if (screenWidth < 640) {
+    $("#console").removeClass('console-close');
+    $("#console").addClass('console-open');
+} else {
+    setTimeout(() => {
+        $("#console").removeClass('console-close');
+        $("#console").addClass('console-open');
+    }, 1700);
+}
+
