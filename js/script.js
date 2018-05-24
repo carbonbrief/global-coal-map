@@ -42,6 +42,37 @@ var baseLayers = [{
 
 }];
 
+var year = 2017;
+
+// SET UP FILTERS
+
+// NEW
+// grab plants where the start year equals start 2...don't use start1 or all different units will show at once
+var filterNew = ['==', ['number', ['get', 'start2']], year];
+
+// CLOSING
+// grab plants where the slider year is the year BEFORE EITHER retire year
+var filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)] ];
+
+// FUTURE
+// filter for construction
+var filterConstruction = ['==', ['string', ['get', 'status']], 'Construction'];
+// filter for planned. Any = logical OR
+var filterPlanned = ['any', ['==', ['string', ['get', 'status']], 'Permitted'], ['==', ['string', ['get', 'status']], 'Pre-permit'], ['==', ['string', ['get', 'status']], 'Announced'] ];
+// link to slider
+// ensure that planned and construction colours only show on the future, ie. when the slider is at position 2018
+var filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
+
+// OPERATIONAL
+// grab plants that don't fit into closing or new categories
+var filterOperating = ['all', ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)]];
+// link to slider and make sure that not planned
+// ensure that the slider year is between year1 and year2, and that it is operating. using less then or equal operator because the filter above will remove those that need to be coloured for new or closing
+var filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['==', ['string', ['get', 'status']], "Operating"] ];
+
+// set up filter for region
+var filterRegion = ['!=', ['string', ['get','regionLabel']], 'placeholder'];
+
 // store an array to convert 2018 to 'planned' in text label
 var getYear = {
     2000: "2000",
@@ -66,150 +97,122 @@ var getYear = {
     2018: "Future"
 }
 
+function addDataLayers() {
+    map.addLayer({
+        id: 'closing',
+        type: 'circle',
+        source: {
+            type: 'geojson',
+            data: './data/plants.geojson'
+        },
+        paint: {
+            'circle-radius': {
+                property: 'capacity',
+                type: 'exponential', // exponential scales in mapbox default to 1 which is a linear scale
+                // found that a linear scale seemed to work better for this than for the UK power map
+                stops: [
+                  [50, 4],
+                  [6720, 30]
+                ]
+              },
+          'circle-color': '#ced1cc',
+          'circle-opacity': 0.5
+            },
+            'filter': ['all', filterClosing, filterRegion]
+       })
+    
+        map.addLayer({
+            id: 'operating',
+            type: 'circle',
+            source: {
+              type: 'geojson',
+              data: './data/plants.geojson'
+            },
+            paint: {
+                'circle-radius': {
+                    property: 'capacity',
+                    type: 'exponential',
+                    stops: [
+                      [50, 4],
+                      [6720, 30]
+                    ]
+                  },
+              'circle-color': '#ffc83e',
+              'circle-opacity': 0.5
+            },
+            'filter': ['all', filterOperating, filterOperating2, filterRegion]    // filter for start and end year AND make sure that start year is less than 2018 (filterYear5)
+        });
+    
+        map.addLayer({
+            id: 'new',
+            type: 'circle',
+            source: {
+                type: 'geojson',
+                data: './data/plants.geojson'
+            },
+            paint: {
+                'circle-radius': {
+                    property: 'capacity',
+                    type: 'exponential',
+                    stops: [
+                      [50, 4],
+                      [6720, 30]
+                    ]
+                  },
+              'circle-color': '#ff8767',
+              'circle-opacity': 0.5
+                },
+                'filter': ['all', filterNew, filterRegion]
+        })
+    
+        map.addLayer({
+            id: 'planned',
+            type: 'circle',
+            source: {
+                type: 'geojson',
+                data: './data/plants.geojson'
+            },
+            paint: {
+                'circle-radius': {
+                    property: 'capacity',
+                    type: 'exponential',
+                    stops: [
+                      [50, 4],
+                      [6720, 30]
+                    ]
+                  },
+              'circle-color': '#a45edb',
+              'circle-opacity': 0.5
+                },
+                'filter': ['all', filterFuture, filterPlanned, filterRegion] 
+        })
+    
+        map.addLayer({
+            id: 'construction',
+            type: 'circle',
+            source: {
+                type: 'geojson',
+                data: './data/plants.geojson'
+            },
+            paint: {
+                'circle-radius': {
+                    property: 'capacity',
+                    type: 'exponential',
+                    stops: [
+                      [50, 4],
+                      [6720, 30]
+                    ]
+                  },
+              'circle-color': '#dd54b6',
+              'circle-opacity': 0.5
+                },
+            'filter': ['all', filterFuture, filterConstruction, filterRegion] 
+        })
+}
+
 map.on('load', function() {
 
-    var year = 2017;
-
-    // FILTERS
-
-    // NEW
-    // grab plants where the start year equals start 2...don't use start1 or all different units will show at once
-    var filterNew = ['==', ['number', ['get', 'start2']], year];
-    
-    // CLOSING
-    // grab plants where the slider year is the year BEFORE EITHER retire year
-    var filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)] ];
-
-    // FUTURE
-    // filter for construction
-    var filterConstruction = ['==', ['string', ['get', 'status']], 'Construction'];
-    // filter for planned. Any = logical OR
-    var filterPlanned = ['any', ['==', ['string', ['get', 'status']], 'Permitted'], ['==', ['string', ['get', 'status']], 'Pre-permit'], ['==', ['string', ['get', 'status']], 'Announced'] ];
-    // link to slider
-    // ensure that planned and construction colours only show on the future, ie. when the slider is at position 2018
-    var filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
-
-    // OPERATIONAL
-    // grab plants that don't fit into closing or new categories
-    var filterOperating = ['all', ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)]];
-    // link to slider and make sure that not planned
-    // ensure that the slider year is between year1 and year2, and that it is operating. using less then or equal operator because the filter above will remove those that need to be coloured for new or closing
-    var filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['==', ['string', ['get', 'status']], "Operating"] ];
-
-    // set up filter for region
-    var filterRegion = ['!=', ['string', ['get','regionLabel']], 'placeholder'];
-
-   map.addLayer({
-    id: 'closing',
-    type: 'circle',
-    source: {
-        type: 'geojson',
-        data: './data/plants.geojson'
-    },
-    paint: {
-        'circle-radius': {
-            property: 'capacity',
-            type: 'exponential', // exponential scales in mapbox default to 1 which is a linear scale
-            // found that a linear scale seemed to work better for this than for the UK power map
-            stops: [
-              [50, 4],
-              [6720, 30]
-            ]
-          },
-      'circle-color': '#ced1cc',
-      'circle-opacity': 0.5
-        },
-        'filter': ['all', filterClosing, filterRegion]
-   })
-
-    map.addLayer({
-        id: 'operating',
-        type: 'circle',
-        source: {
-          type: 'geojson',
-          data: './data/plants.geojson'
-        },
-        paint: {
-            'circle-radius': {
-                property: 'capacity',
-                type: 'exponential',
-                stops: [
-                  [50, 4],
-                  [6720, 30]
-                ]
-              },
-          'circle-color': '#ffc83e',
-          'circle-opacity': 0.5
-        },
-        'filter': ['all', filterOperating, filterOperating2, filterRegion]    // filter for start and end year AND make sure that start year is less than 2018 (filterYear5)
-    });
-
-    map.addLayer({
-        id: 'new',
-        type: 'circle',
-        source: {
-            type: 'geojson',
-            data: './data/plants.geojson'
-        },
-        paint: {
-            'circle-radius': {
-                property: 'capacity',
-                type: 'exponential',
-                stops: [
-                  [50, 4],
-                  [6720, 30]
-                ]
-              },
-          'circle-color': '#ff8767',
-          'circle-opacity': 0.5
-            },
-            'filter': ['all', filterNew, filterRegion]
-    })
-
-    map.addLayer({
-        id: 'planned',
-        type: 'circle',
-        source: {
-            type: 'geojson',
-            data: './data/plants.geojson'
-        },
-        paint: {
-            'circle-radius': {
-                property: 'capacity',
-                type: 'exponential',
-                stops: [
-                  [50, 4],
-                  [6720, 30]
-                ]
-              },
-          'circle-color': '#a45edb',
-          'circle-opacity': 0.5
-            },
-            'filter': ['all', filterFuture, filterPlanned, filterRegion] 
-    })
-
-    map.addLayer({
-        id: 'construction',
-        type: 'circle',
-        source: {
-            type: 'geojson',
-            data: './data/plants.geojson'
-        },
-        paint: {
-            'circle-radius': {
-                property: 'capacity',
-                type: 'exponential',
-                stops: [
-                  [50, 4],
-                  [6720, 30]
-                ]
-              },
-          'circle-color': '#dd54b6',
-          'circle-opacity': 0.5
-            },
-        'filter': ['all', filterFuture, filterConstruction, filterRegion] 
-    })
-
+    //addDataLayers();
 
     // update hour filter when the slider is dragged
     document.getElementById('slider').addEventListener('input', function(e) {
@@ -293,6 +296,8 @@ map.on('load', function() {
         var basemap = baseLayers.find(x => x.label === dropdown).id;
 
         console.log(basemap);
+
+        map.setStyle(basemap);
     })
 
     // Create a popup, but don't add it to the map yet.
@@ -452,6 +457,11 @@ map.on('load', function() {
     });
 
 
+});
+
+map.on('style.load', function () {
+    // Triggered when `setStyle` is called.
+    addDataLayers();
 });
 
 // reset dropdown on window reload
