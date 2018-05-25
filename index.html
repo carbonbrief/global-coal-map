@@ -51,6 +51,7 @@
                 </ul>
             </div>
             <div class='session' id="dropdown">
+                <h2>Region: <span id="region">All</span></h2>
                 <select id='selectorRegion' class="selector">
                     <option value='All' selected='selected'>All regions</option>
                     <option value='Africa and Middle East' >Africa and the Middle East</option>
@@ -71,7 +72,7 @@
                 </select>  
             </div>
             <div class="session" id="charts">
-                <h2>Coal since 2000</h2>
+                <h2>Total: <span id="total">1,996,426</span> <span style="font-weight: normal; font-size: 10px">MW</span></h2>
                 <div id="line-wrapper">
                     <div id="bar-chart"></div>
                     <div id="line-chart-background"></div>
@@ -96,6 +97,7 @@
         <script src="js/script.js"></script>
         <script src="js/bar-chart.js"></script>
         <script src="js/line-chart.js"></script>
-        <script src="js/loading.js"></script> 
+        <script src="js/loading.js"></script>
+        <script src="js/totals.js"></script>  
     </body>
 </html>

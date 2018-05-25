@@ -133,8 +133,16 @@ function addDataLayers() {
                 type: 'exponential', // exponential scales in mapbox default to 1 which is a linear scale
                 // found that a linear scale seemed to work better for this than for the UK power map
                 stops: [
-                  [50, 4],
-                  [6720, 30]
+                    [{zoom: 0, value: 50}, 1.5],
+                    [{zoom: 0, value: 6720}, 20],
+                    [{zoom: 3, value: 50}, 3],
+                    [{zoom: 3, value: 6720}, 27],
+                    [{zoom: 7, value: 50}, 4.5],
+                    [{zoom: 7, value: 6720}, 32],
+                    [{zoom: 12, value: 50}, 6],
+                    [{zoom: 12, value: 6720}, 37],
+                    [{zoom: 18, value: 50}, 8],
+                    [{zoom: 18, value: 6720}, 42]
                 ]
               },
           'circle-color': '#ced1cc',
@@ -158,8 +166,16 @@ function addDataLayers() {
                     property: 'capacity',
                     type: 'exponential',
                     stops: [
-                      [50, 4],
-                      [6720, 30]
+                        [{zoom: 0, value: 50}, 1.5],
+                        [{zoom: 0, value: 6720}, 20],
+                        [{zoom: 3, value: 50}, 3],
+                        [{zoom: 3, value: 6720}, 27],
+                        [{zoom: 7, value: 50}, 4.5],
+                        [{zoom: 7, value: 6720}, 32],
+                        [{zoom: 12, value: 50}, 6],
+                        [{zoom: 12, value: 6720}, 37],
+                        [{zoom: 18, value: 50}, 8],
+                        [{zoom: 18, value: 6720}, 42]
                     ]
                   },
                 'circle-color': '#ffc23b',
@@ -183,8 +199,16 @@ function addDataLayers() {
                     property: 'capacity',
                     type: 'exponential',
                     stops: [
-                      [50, 4],
-                      [6720, 30]
+                        [{zoom: 0, value: 50}, 1.5],
+                        [{zoom: 0, value: 6720}, 20],
+                        [{zoom: 3, value: 50}, 3],
+                        [{zoom: 3, value: 6720}, 27],
+                        [{zoom: 7, value: 50}, 4.5],
+                        [{zoom: 7, value: 6720}, 32],
+                        [{zoom: 12, value: 50}, 6],
+                        [{zoom: 12, value: 6720}, 37],
+                        [{zoom: 18, value: 50}, 8],
+                        [{zoom: 18, value: 6720}, 42]
                     ]
                   },
               'circle-color': '#f97b62',
@@ -208,8 +232,16 @@ function addDataLayers() {
                     property: 'capacity',
                     type: 'exponential',
                     stops: [
-                      [50, 4],
-                      [6720, 30]
+                        [{zoom: 0, value: 50}, 1.5],
+                        [{zoom: 0, value: 6720}, 21],
+                        [{zoom: 3, value: 50}, 3],
+                        [{zoom: 3, value: 6720}, 27],
+                        [{zoom: 7, value: 50}, 4.5],
+                        [{zoom: 7, value: 6720}, 32],
+                        [{zoom: 12, value: 50}, 6],
+                        [{zoom: 12, value: 6720}, 37],
+                        [{zoom: 18, value: 50}, 8],
+                        [{zoom: 18, value: 6720}, 42]
                     ]
                   },
               'circle-color': '#a45edb',
@@ -233,8 +265,16 @@ function addDataLayers() {
                     property: 'capacity',
                     type: 'exponential',
                     stops: [
-                      [50, 4],
-                      [6720, 30]
+                        [{zoom: 0, value: 50}, 1.5],
+                        [{zoom: 0, value: 6720}, 21],
+                        [{zoom: 3, value: 50}, 3],
+                        [{zoom: 3, value: 6720}, 27],
+                        [{zoom: 7, value: 50}, 4.5],
+                        [{zoom: 7, value: 6720}, 32],
+                        [{zoom: 12, value: 50}, 6],
+                        [{zoom: 12, value: 6720}, 37],
+                        [{zoom: 18, value: 50}, 8],
+                        [{zoom: 18, value: 6720}, 42]
                     ]
                   },
               'circle-color': '#dd54b6',
@@ -272,21 +312,23 @@ map.on('load', function() {
   
         // update text in the UI. Use getYear array to ensure that 2018 displays as 'future'
         document.getElementById('active-hour').innerText = getYear[year];
+
+        updateTotal();
     });
 
     // update map when the region selector is changed
     document.getElementById('selectorRegion').addEventListener('change', function(e) {
 
         // update variables
-        dropdown = e.target.value;
+        region = e.target.value;
         // declare year variable again so that it doesn't default to 2017
         year = document.getElementById('slider').value;
 
         // update filter
-        if (dropdown == "All") {
+        if (region == "All") {
             filterRegion = ['!=', ['string', ['get', 'regionLabel']], "placeholder"];
         } else {
-            filterRegion = ['==', ['string', ['get', 'regionLabel']], dropdown];
+            filterRegion = ['==', ['string', ['get', 'regionLabel']], region];
         }
         
         // update the map
@@ -297,31 +339,36 @@ map.on('load', function() {
         map.setFilter('planned', ['all', filterFuture, filterPlanned, filterRegion]);
 
         // zoom to filtered markers
-        if (dropdown == "All") {
+        if (region == "All") {
             map.fitBounds([[-170, -70], [178,80]]);
-        } else if (dropdown == "Africa and Middle East") {
+        } else if (region == "Africa and Middle East") {
             map.fitBounds([[-29.69, -46.61], [54.43, 57.09]]);
-        } else if (dropdown == "China") {
+        } else if (region == "China") {
             map.fitBounds([[36.35, 12.71], [145.99, 52.75]]);
-        } else if (dropdown == "EU28") {
+        } else if (region == "EU28") {
             map.fitBounds([[-51.05, 35], [43.47, 60]]);
-        } else if (dropdown == "Former USSR") {
+        } else if (region == "Former USSR") {
             map.fitBounds([[-80, 24.77], [175, 70.23]]);
-        } else if (dropdown == "India") {
+        } else if (region == "India") {
             map.fitBounds([[54.24, -5], [80.64, 40]]);
-        } else if (dropdown == "Latin America") {
+        } else if (region == "Latin America") {
             map.fitBounds([[-140.16, -58], [-70.0, 40]]);
-        } else if (dropdown == "Non-EU Europe") {
+        } else if (region == "Non-EU Europe") {
             map.fitBounds([[-10, 30.56], [50, 45]]);
-        } else if (dropdown == "Other") {
+        } else if (region == "Other") {
             map.fitBounds([[-179, -70], [170, 88]]);
-        } else if (dropdown == "Other Asia") {
+        } else if (region == "Other Asia") {
             map.fitBounds([[0, -21.35], [159.14, 56]]);
-        } else if (dropdown == "United States") {
+        } else if (region == "United States") {
             map.fitBounds([[-170.66, 19.40], [-56.38, 55]]);
         } else {
             // do nothing
         }
+
+        // update text in the UI
+        document.getElementById('region').innerText = [region];
+
+        updateTotal();
 
     });
 
