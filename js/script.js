@@ -138,7 +138,10 @@ function addDataLayers() {
                 ]
               },
           'circle-color': '#ced1cc',
-          'circle-opacity': 0.5
+          'circle-opacity': 0.5,
+          'circle-stroke-color': '#ced1cc',
+          'circle-stroke-width': 0.5,
+          'circle-stroke-opacity': 0.8
             },
             'filter': ['all', filterClosing, filterRegion]
        })
@@ -159,8 +162,11 @@ function addDataLayers() {
                       [6720, 30]
                     ]
                   },
-              'circle-color': '#ffc23b',
-              'circle-opacity': 0.5
+                'circle-color': '#ffc23b',
+                'circle-opacity': 0.5,
+              'circle-stroke-color': '#ffc23b',
+              'circle-stroke-width': 0.5,
+              'circle-stroke-opacity': 0.8
             },
             'filter': ['all', filterOperating, filterOperating2, filterRegion]    // filter for start and end year AND make sure that start year is less than 2018 (filterYear5)
         });
@@ -182,7 +188,10 @@ function addDataLayers() {
                     ]
                   },
               'circle-color': '#f97b62',
-              'circle-opacity': 0.5
+              'circle-opacity': 0.5,
+              'circle-stroke-color': '#f97b62',
+              'circle-stroke-width': 0.5,
+              'circle-stroke-opacity': 0.8
                 },
                 'filter': ['all', filterNew, filterRegion]
         })
@@ -204,7 +213,10 @@ function addDataLayers() {
                     ]
                   },
               'circle-color': '#a45edb',
-              'circle-opacity': 0.5
+              'circle-opacity': 0.5,
+              'circle-stroke-color': '#a45edb',
+              'circle-stroke-width': 0.5,
+              'circle-stroke-opacity': 0.8
                 },
                 'filter': ['all', filterFuture, filterPlanned, filterRegion] 
         })
@@ -226,7 +238,10 @@ function addDataLayers() {
                     ]
                   },
               'circle-color': '#dd54b6',
-              'circle-opacity': 0.5
+              'circle-opacity': 0.5,
+              'circle-stroke-color': '#dd54b6',
+              'circle-stroke-width': 0.5,
+              'circle-stroke-opacity': 0.8
                 },
             'filter': ['all', filterFuture, filterConstruction, filterRegion] 
         })
@@ -283,7 +298,7 @@ map.on('load', function() {
 
         // zoom to filtered markers
         if (dropdown == "All") {
-            map.fitBounds([[-126.61, -58.18], [133.12, 70.23]]);
+            map.fitBounds([[-170, -70], [178,80]]);
         } else if (dropdown == "Africa and Middle East") {
             map.fitBounds([[-29.69, -46.61], [54.43, 57.09]]);
         } else if (dropdown == "China") {
