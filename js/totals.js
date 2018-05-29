@@ -252,18 +252,46 @@ var totals = [
     "All": "1,996,426"
   },{
     "year": 2018,
-    "China": "x",
-    "United States": "x",
-    "India": "x",
-    "Other Asia": "x",
-    "EU28": "x",
-    "Former USSR":"x",
-    "Non-EU Europe":"x",
-    "Latin America":"x",
-    "Africa and Middle East":"x",
-    "Other":"x",
-    "All": "x"
+    "China": "934,862",
+    "United States": "220,529",
+    "India": "213,345",
+    "Other Asia": "176,397",
+    "EU28": "99,564",
+    "Former USSR":"89,021",
+    "Non-EU Europe":"27,262",
+    "Latin America":"12,390",
+    "Africa and Middle East":"41,797",
+    "Other":"14,726",
+    "All": "1,829,893"
 }]
+
+var construction = {
+  "China": "94,828",
+  "United States": "0",
+  "India": "43,628",
+  "Other Asia": "49,744",
+  "EU28": "5,810",
+  "Former USSR":"1,176",
+  "Non-EU Europe":"1,130",
+  "Latin America":"2,175",
+  "Africa and Middle East":"11,075",
+  "Other":"0",
+  "All": "209,566"
+}
+
+var planned = {
+  "China": "116,075",
+  "United States": "0",
+  "India": "87,731",
+  "Other Asia": "127,969",
+  "EU28": "9,270",
+  "Former USSR":"1,176",
+  "Non-EU Europe":"49,873",
+  "Latin America":"3,466",
+  "Africa and Middle East":"45,940",
+  "Other":"0",
+  "All": "442,724"
+}
 
 function updateTotal () {
 
@@ -271,28 +299,49 @@ function updateTotal () {
     region = document.getElementById('selectorRegion').value;
     var newArray;
 
-    console.log(yearSlider);
-    console.log(region);
+    //console.log(yearSlider);
+    //console.log(region);
 
     // get id from array using the dropdown variable
     //var total = totals.find(x => x.year === yearSlider).region;
 
-    // function search(yearSlider, totals){
-    //     for (var i=0; i < totals.length; i++) {
-    //         if (totals[i].year === yearSlider) {
-    //             return  totals[i];
-    //             console.log(totals[i]);
-    //         }
-    //     }
-    // };
-
     var newArray = totals.filter(x => x.year === parseInt(yearSlider));
 
-    console.log(newArray);
+    //console.log(newArray);
 
     var total = newArray[0][region];
 
    document.getElementById('total').innerText = total;
     
 }
+
+function updateFuture () {
+
+  region = document.getElementById('selectorRegion').value;
+
+  var constructionTotal = construction[region];
+  var plannedTotal = planned[region];
+
+  // console.log(constructionTotal);
+  // console.log(plannedTotal);
+
+  document.getElementById('constructionTotal').innerText = constructionTotal;
+  document.getElementById('plannedTotal').innerText = plannedTotal;
+
+}
+
+// show planned and construction in the future
+document.getElementById('slider').addEventListener('input', function(e) {
+
+  year = parseInt(e.target.value);
+
+  if (year == 2018) {
+    document.getElementById("construction").style.visibility = "visible";
+    document.getElementById("planned").style.visibility = "visible";
+  } else {
+    document.getElementById("construction").style.visibility = "hidden";
+    document.getElementById("planned").style.visibility = "hidden";
+  }
+
+});
 

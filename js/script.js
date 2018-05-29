@@ -314,6 +314,7 @@ map.on('load', function() {
         document.getElementById('active-hour').innerText = getYear[year];
 
         updateTotal();
+        
     });
 
     // update map when the region selector is changed
@@ -369,6 +370,7 @@ map.on('load', function() {
         document.getElementById('region').innerText = [region];
 
         updateTotal();
+        updateFuture();
 
     });
 
