@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="css/charts.css">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/toggle.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     </head>
     <body>
         
@@ -51,6 +52,8 @@
                 </ul>
             </div>
             <div class='session' id="dropdown">
+                <div id="dropdown-titles"></div>
+                <h2>Region: <span id="region">All</span></h2>
                 <h2>Region: <span id="region">All</span></h2>
                 <select id='selectorRegion' class="selector">
                     <option value='All' selected='selected'>All regions</option>
@@ -68,11 +71,11 @@
                 <select id='selectorStyle' class="selector">
                     <option value="Dark" selected="selected">Dark</option>
                     <option value="Light">Light (3D buildings)</option>
-                    <option value="Satellite">Satellite day</option>
+                    <option value="Satellite">Satellite</option>
                 </select>  
             </div>
             <div class="session" id="charts">
-                <h2>Operating: <span id="total">1,996,426</span> <span style="font-weight: normal; font-size: 9px">MW</span><span id="construction" style="color: #dd54b6">   <span id="constructionTotal">209,566</span> <span style="font-weight: normal; font-size: 9px">MW</span></span><span id="planned" style="color: #a45edb">   <span id="plannedTotal">442,724</span> <span style="font-weight: normal; font-size: 9px">MW</span></span></h2>
+                <h2>Operating: <span id="total">1,996,426</span> <span style="font-weight: normal; font-size: 9px">MW</span><span id="construction" style="color: #dd54b6">   <span id="constructionTotal">209,566</span> <span style="font-weight: normal; font-size: 9px">MW</span></span><span id="planned" style="color: #a66edb">   <span id="plannedTotal">442,724</span> <span style="font-weight: normal; font-size: 9px">MW</span></span></h2>
                 <div id="line-wrapper">
                     <div id="bar-chart"></div>
                     <div id="line-chart-background"></div>
@@ -82,8 +85,9 @@
             <div class="session" id="credit">
                 <p>Data courtesy of <a href='http://coalswarm.org/' target='_blank'>CoalSwarm</a>. Interactive by <a href='https://www.carbonbrief.org/author/rospearce' >Rosamund Pearce</a> with data wrangling by <a href='https://www.carbonbrief.org/author/simonevans' target='_blank'>Simon Evans</a> for <a href='https://www.carbonbrief.org/'>Carbon Brief</a>. Licensed under <a href='https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode'>Creative Commons.</a></p>
             </div>
-        </div>
+        </div>         
         <div id='map'></div>
+        <div id='home-button-wrapper'><a href='#' id="home-button"><i class="fas fa-home"></i></a></div>
         <div id='loading'>
             <div id="canvas-wrapper">
                 <canvas id="canvas-id" width="120" height="120"> </canvas>

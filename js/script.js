@@ -1,5 +1,5 @@
 var bounds = [
-    [ -170, -70],[178, 80]
+    [ -180, -70],[140, 80]
 ]
 
 var map = new mapboxgl.Map({
@@ -342,7 +342,7 @@ map.on('load', function() {
 
         // zoom to filtered markers
         if (region == "All") {
-            map.fitBounds([[-170, -70], [178,80]]);
+            map.fitBounds([[-180, -70], [140,80]]);
         } else if (region == "Africa and Middle East") {
             map.fitBounds([[-29.69, -46.61], [54.43, 57.09]]);
         } else if (region == "China") {
@@ -510,7 +510,7 @@ map.on('load', function() {
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #a45edb;">' + name + '</h3><p><span class="label-title">Capacity: </span>' + capacity + ' MW</p><p><span class="label-title">Coal type: </span>' + coalType +  '</p><p><span class="label-title">Technology: </span>' + techType + '</p><p><span class="label-title">Carbon emissions: </span>' + annualCarbon + ' mt/year</p>')
+            .setHTML('<h3 style = "color: #a66edb;">' + name + '</h3><p><span class="label-title">Capacity: </span>' + capacity + ' MW</p><p><span class="label-title">Coal type: </span>' + coalType +  '</p><p><span class="label-title">Technology: </span>' + techType + '</p><p><span class="label-title">Carbon emissions: </span>' + annualCarbon + ' mt/year</p>')
             .addTo(map);
 
     });
@@ -574,6 +574,19 @@ $(".toggle").click(function() {
     $('.arrow-right-hidden').toggleClass('arrow-right');
     $('.arrow-left').toggleClass('arrow-left-hidden');
 });
+
+// HOME BUTTON
+
+$("#home-button").click(function() {
+    map.flyTo({
+        center: [-10, 10],
+        zoom: 1,
+        bearing: 0,
+        pitch: 0,
+        speed: 1,
+        animate: true
+    });
+})
 
 // sidebar open transitions appears after the loading message has finished above a certain screen size 
 
