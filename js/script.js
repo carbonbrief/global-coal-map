@@ -61,7 +61,6 @@ var baseLayers = [{
             "maxzoom": 22
         }]
     }
-
 }];
 
 var year = 2017;
@@ -314,7 +313,7 @@ map.on('load', function() {
         document.getElementById('active-hour').innerText = getYear[year];
 
         updateTotal();
-        
+
     });
 
     // update map when the region selector is changed
@@ -419,7 +418,7 @@ map.on('load', function() {
         // Populate the popup and set its coordinates
         // based on the feature found.
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ffc83e;">' + name + '</h3><p>Capacity: <b>' + capacity + ' MW</b></p><p>Type: <b>' + coalType + '</b></p><p>Year opened: <b>' + yearOpened + '</b></p><p>Age: <b>' + (year-firstStart) + ' year(s)</b></p>')
+            .setHTML('<h3 style = "color: #ffc83e;">' + name + '</h3><p><span class="label-title">Capacity: </span>' + capacity + ' MW</p><p><b>Type: </b>' + coalType + '</p><p><b>Year opened: </b>' + yearOpened + '</p><p><b>Age: </b>' + (year-firstStart) + ' year(s)</p>')
             .addTo(map);
 
     });
