@@ -73,7 +73,7 @@ var filterNew = ['==', ['number', ['get', 'start2']], year];
 
 // CLOSING
 // grab plants where the slider year is the year BEFORE EITHER retire year
-var filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)] ];
+var filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)], ['==', ['number', ['get', 'retire3']], (year+1)], ];
 
 // FUTURE
 // filter for construction
@@ -86,7 +86,7 @@ var filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['
 
 // OPERATIONAL
 // grab plants that don't fit into closing or new categories
-var filterOperating = ['all', ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)]];
+var filterOperating = ['all', ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)], ['!=', ['number', ['get', 'retire3']], (year+1)]];
 // link to slider and make sure that not planned
 // ensure that the slider year is between year1 and year2, and that it is operating. using less then or equal operator because the filter above will remove those that need to be coloured for new or closing
 var filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['==', ['string', ['get', 'status']], "Operating"] ];
@@ -119,39 +119,7 @@ var getYear = {
 }
 
 function addDataLayers() {
-    map.addLayer({
-        id: 'closing',
-        type: 'circle',
-        source: {
-            type: 'geojson',
-            data: './data/plants.geojson'
-        },
-        paint: {
-            'circle-radius': {
-                property: 'capacity',
-                type: 'exponential', // exponential scales in mapbox default to 1 which is a linear scale
-                // found that a linear scale seemed to work better for this than for the UK power map
-                stops: [
-                    [{zoom: 0, value: 50}, 1.5],
-                    [{zoom: 0, value: 6720}, 20],
-                    [{zoom: 3, value: 50}, 3],
-                    [{zoom: 3, value: 6720}, 27],
-                    [{zoom: 7, value: 50}, 4.5],
-                    [{zoom: 7, value: 6720}, 32],
-                    [{zoom: 12, value: 50}, 6],
-                    [{zoom: 12, value: 6720}, 37],
-                    [{zoom: 18, value: 50}, 8],
-                    [{zoom: 18, value: 6720}, 42]
-                ]
-              },
-          'circle-color': '#ced1cc',
-          'circle-opacity': 0.5,
-          'circle-stroke-color': '#ced1cc',
-          'circle-stroke-width': 0.5,
-          'circle-stroke-opacity': 0.8
-            },
-            'filter': ['all', filterClosing, filterRegion]
-       })
+
     
         map.addLayer({
             id: 'operating',
@@ -185,6 +153,40 @@ function addDataLayers() {
             },
             'filter': ['all', filterOperating, filterOperating2, filterRegion]    // filter for start and end year AND make sure that start year is less than 2018 (filterYear5)
         });
+
+        map.addLayer({
+            id: 'closing',
+            type: 'circle',
+            source: {
+                type: 'geojson',
+                data: './data/plants.geojson'
+            },
+            paint: {
+                'circle-radius': {
+                    property: 'capacity',
+                    type: 'exponential', // exponential scales in mapbox default to 1 which is a linear scale
+                    // found that a linear scale seemed to work better for this than for the UK power map
+                    stops: [
+                        [{zoom: 0, value: 50}, 1.5],
+                        [{zoom: 0, value: 6720}, 20],
+                        [{zoom: 3, value: 50}, 3],
+                        [{zoom: 3, value: 6720}, 27],
+                        [{zoom: 7, value: 50}, 4.5],
+                        [{zoom: 7, value: 6720}, 32],
+                        [{zoom: 12, value: 50}, 6],
+                        [{zoom: 12, value: 6720}, 37],
+                        [{zoom: 18, value: 50}, 8],
+                        [{zoom: 18, value: 6720}, 42]
+                    ]
+                  },
+              'circle-color': '#ced1cc',
+              'circle-opacity': 0.5,
+              'circle-stroke-color': '#ced1cc',
+              'circle-stroke-width': 0.5,
+              'circle-stroke-opacity': 0.8
+                },
+                'filter': ['all', filterClosing, filterRegion]
+        })
     
         map.addLayer({
             id: 'new',
@@ -297,9 +299,9 @@ map.on('load', function() {
         
         // update any map filters containing the variable year
         filterNew = ['==', ['number', ['get', 'start2']], year];
-        filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)] ];
+        filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)], ['==', ['number', ['get', 'retire3']], (year+1)] ];
         filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
-        filterOperating = ['all', ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)]];
+        filterOperating = ['all', ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)], ['!=', ['number', ['get', 'retire3']], (year+1)]];
         filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['==', ['string', ['get', 'status']], "Operating"] ];
 
         // update the map
