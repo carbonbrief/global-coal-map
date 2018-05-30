@@ -171,7 +171,7 @@ function drawChart(filterData){
         .data(function(d){return d.values})
         .enter()
         .append("circle")
-        .attr("r", 4)
+        .attr("r", 6)
         .attr("cx", function(d) { return x(d.year); })
         .attr("cy", function(d) { return y(d.capacity); })
         // in order to have a the circle to be the same color as the line, you need to access the data of the parentNode
