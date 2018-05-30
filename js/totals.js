@@ -336,11 +336,11 @@ document.getElementById('slider').addEventListener('input', function(e) {
   year = parseInt(e.target.value);
 
   if (year == 2018) {
-    document.getElementById("construction").style.visibility = "visible";
-    document.getElementById("planned").style.visibility = "visible";
+    document.getElementById("construction").style.display = "inline";
+    document.getElementById("planned").style.display = "inline";
   } else {
-    document.getElementById("construction").style.visibility = "hidden";
-    document.getElementById("planned").style.visibility = "hidden";
+    document.getElementById("construction").style.display = "none";
+    document.getElementById("planned").style.display = "none";
   }
 
 });

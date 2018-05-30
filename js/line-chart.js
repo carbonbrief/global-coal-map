@@ -1,7 +1,17 @@
+function getHeight () {
+    if (screenWidth > 1000) {
+        return 300
+    } else {
+        return 260
+    }
+}
+
+var responsiveHeight = getHeight();
+
 var margin = {top: 10, right: 15, bottom: 30, left: 45},
     // calculate the width of the chart from the width of the line-wrapper
     width = parseInt(d3.select("#line-wrapper").style("width")) - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+    height = responsiveHeight - margin.top - margin.bottom;
 
 var parseDate = d3.timeParse("%Y");
 var parseDate2 = d3.timeParse("%Y%m%d");

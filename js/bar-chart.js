@@ -1,7 +1,18 @@
+function getHeight () {
+    if (screenWidth > 1050) {
+        return 300
+    } else if (screenWidth < 1050) {
+        return 260
+    } 
+}
+console.log(screenWidth);
+
+var responsiveHeight = getHeight();
+
 // set the dimensions and margins of the graph
 var margin = {top: 8, right: 15, bottom: 30, left: 45},
     width = parseInt(d3.select("#line-wrapper").style("width")) - margin.left - margin.right,
-    height = 302 - margin.top - margin.bottom;
+    height = (responsiveHeight + 2) - margin.top - margin.bottom;
 
 // different names to line chart
 

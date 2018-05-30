@@ -1,11 +1,7 @@
-var bounds = [
-    [ -180, -70],[140, 80]
-]
-
 var map = new mapboxgl.Map({
     container: 'map',
     style: 'https://openmaptiles.github.io/dark-matter-gl-style/style-cdn.json',
-    center: [8, 10],
+    center: [8, 20],
     zoom: 1.5
 });
 
@@ -14,21 +10,61 @@ map.addControl(new mapboxgl.NavigationControl());
 
 var screenWidth = $(window).width();
 
+var boundsMobile = [
+    [ -100, -70],[120, 85]
+]
+
+var boundsLaptop = [
+    [ -180, -50],[100, 90]
+]
+
+var boundsDesktop = [
+    [ -188, -75],[90, 86]
+]
+
+var boundsRetina = [
+    [ -165, -65],[91, 78]
+]
+
+function getBounds () {
+    // 850 pixels is the screen width below which the charts get hidden
+    if (screenWidth > 1400) {
+        return boundsRetina
+    }
+    else if (screenWidth > 1024 && screenWidth < 1400) {
+        return boundsDesktop
+    } 
+    else if (1024 > screenWidth && screenWidth > 850) {
+        return boundsLaptop
+    } else {
+        return boundsMobile
+    }
+}
+
+var bounds = getBounds();
+
+console.log(bounds);
+
+// resize map for the screen
+map.fitBounds(bounds, {padding: 10});
+
 // only include geolocate control on larger screens, to reduce clutter
 if (screenWidth > 700) {
     map.addControl(new mapboxgl.GeolocateControl({
         fitBoundsOptions: {
-            maxZoom: 5
+            maxZoom: 6
         }
     }));
+} else {
+    // hide the home button on smaller screens
+    document.getElementById("home-button-wrapper").style.visibility = "hidden";
 }
 
 // map.addControl(new MapboxGeocoder({
 //     accessToken: mapboxgl.accessToken
 // }));
 
-// resize map for the screen
-map.fitBounds(bounds, {padding: 20});
+
 
 var baseLayers = [{
     label: 'Dark',
@@ -385,6 +421,9 @@ map.on('load', function() {
         console.log(basemap);
 
         map.setStyle(basemap);
+
+        // update text in the UI
+        document.getElementById('map-type').innerText = [dropdown];
     })
 
     // Create a popup, but don't add it to the map yet.
