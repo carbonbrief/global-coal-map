@@ -1,14 +1,37 @@
-var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'https://openmaptiles.github.io/dark-matter-gl-style/style-cdn.json',
-    center: [8, 20],
-    zoom: 1.5
-});
+if (!mapboxgl.supported()) {
+    alert('Your browser does not support Mapbox GL');
+} else {
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'https://openmaptiles.github.io/dark-matter-gl-style/style-cdn.json',
+        center: [8, 20],
+        zoom: 1.5
+    });
+}
+
+// mapboxgl.accessToken = config.key1;
+
+var screenWidth = $(window).width();
+
+// only include geolocate and control on larger screens, to reduce clutter
+// include first to appears at top of controls
+
+// if (screenWidth > 1300){
+//     map.addControl(new MapboxGeocoder({
+//         accessToken: mapboxgl.accessToken,
+//         // types: "place"
+//     }));
+// }
+
+// map.addControl(new MapboxGeocoder({
+//     accessToken: mapboxgl.accessToken
+// }));
+
 
 // Add zoom and rotation controls to the map.
 map.addControl(new mapboxgl.NavigationControl());
 
-var screenWidth = $(window).width();
+
 
 var boundsMobile = [
     [ -100, -70],[120, 85]
@@ -43,21 +66,21 @@ function getBounds () {
 
 var bounds = getBounds();
 
-console.log(bounds);
+// console.log(bounds);
 
 // resize map for the screen
 map.fitBounds(bounds, {padding: 10});
 
-// only include geolocate control on larger screens, to reduce clutter
-if (screenWidth > 700) {
+// only include geolocate and control on larger screens, to reduce clutter
+// include last to appears at bottom of controls
+if (screenWidth > 980) {
+
     map.addControl(new mapboxgl.GeolocateControl({
         fitBoundsOptions: {
             maxZoom: 6
         }
     }));
-} else {
-    // hide the home button on smaller screens
-    document.getElementById("home-button-wrapper").style.visibility = "hidden";
+
 }
 
 // map.addControl(new MapboxGeocoder({
@@ -378,7 +401,7 @@ map.on('load', function() {
 
         // zoom to filtered markers
         if (region == "All") {
-            map.fitBounds([[-180, -70], [140,80]]);
+            map.fitBounds([[ -188, -75],[90, 86]]);
         } else if (region == "Africa and Middle East") {
             map.fitBounds([[-29.69, -46.61], [54.43, 57.09]]);
         } else if (region == "China") {
@@ -418,7 +441,7 @@ map.on('load', function() {
        // get id from array using the dropdown variable
         var basemap = baseLayers.find(x => x.label === dropdown).id;
 
-        console.log(basemap);
+        // console.log(basemap);
 
         map.setStyle(basemap);
 
