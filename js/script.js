@@ -664,10 +664,14 @@ if (screenWidth < 640) {
 
 // PROMPT BEHAVIOURS
 
+var randomWrapper = Math.floor((Math.random() * 3) + 1);
+
+console.log(randomWrapper);
+
 if (screenWidth > 980) {
     var promptTimeout = setTimeout(function() {
-        $("#prompt-wrapper").toggleClass("prompt-in prompt-out");
-    }, 7000);
+        $("#prompt-wrapper" + randomWrapper).toggleClass("prompt-in prompt-out");
+    }, 8000);
 }
 
 // clear timeout when the user start interacting with the map, so not distracting
@@ -677,12 +681,12 @@ $(document).one("mousedown", function () {
 })
 
 setTimeout(function() {
-    $("#prompt-wrapper").removeClass("prompt-in");
-    $("#prompt-wrapper").addClass("prompt-fade");
-}, 22000);
+    $(".prompt-wrapper").removeClass("prompt-in");
+    $(".prompt-wrapper").addClass("prompt-fade");
+}, 23000);
 
 $("#prompt-wrapper").mousemove(function() {
-    $("#prompt-wrapper").removeClass("prompt-in");
-    $("#prompt-wrapper").addClass("prompt-out");
+    $(".prompt-wrapper").removeClass("prompt-in");
+    $(".prompt-wrapper").addClass("prompt-out");
 })
 

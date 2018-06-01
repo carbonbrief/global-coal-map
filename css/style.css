@@ -14,7 +14,7 @@ body {
 
 #home-button-wrapper {
   position: absolute;
-  top: 200px;
+  top: 150px;
   right: 10px;
   height: 18px;
   width: 18px;
@@ -145,13 +145,21 @@ p {
   height: 25px;
 }
 
-#prompt-wrapper {
+.prompt-wrapper {
   position: absolute;
   top: 55px;
   right: -140px;
 }
 
-#prompt {
+#prompt-wrapper1 {
+  top: 55px;
+}
+
+#prompt-wrapper2 {
+  top: 95px;
+}
+
+.prompt {
   position: relative;
   font-size: 13px;
   color: #c4c4c4;
@@ -167,7 +175,7 @@ p {
 }
 
 /* add the arrow to the prompt box */
-#prompt:before{
+.prompt:before{
   content: "";
   position: absolute;
   top: 12px;
@@ -205,33 +213,6 @@ p {
   -ms-transform: translateX(-200px);
   -webkit-transform: translateX(-200px);
 }
-
-/* .prompt-in {
-  opacity: 1;
-  animation: fade 2s linear;
-  transform: translateX(-200px);
-  -ms-transform: translateX(-200px);
-  -webkit-transform: translateX(-200px);
-  transition-duration: 0.8s;
-  -webkit-transition-duration: 0.8s;
-  transition-property: transform;
-  -webkit-transition-property: transform;
-  -moz-transition-property: transform;
-  
-}
-
-.prompt-out {
-  opacity: 0;
-  animation: fade 2s linear;
-  transform: translateX(200px);
-  -ms-transform: translateX(200px);
-  -webkit-transform: translateX(200px);
-  transition-duration: 0.8s;
-  -webkit-transition-duration: 0.8s;
-  transition-property: transform;
-  -webkit-transition-property: transform;
-  -moz-transition-property: transform;
-} */
 
 
 select {
