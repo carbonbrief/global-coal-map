@@ -662,3 +662,24 @@ if (screenWidth < 640) {
     }, 1700);
 }
 
+// BRING IN PROMPT
+
+var promptTimeout = setTimeout(function() {
+    $("#prompt-wrapper").toggleClass("prompt-in prompt-out");
+}, 6000);
+
+$(document).one("click", function () {
+    clearTimeout(promptTimeout);
+    console.log("clear timeout");
+})
+
+setTimeout(function() {
+    $("#prompt-wrapper").removeClass("prompt-in");
+    $("#prompt-wrapper").addClass("prompt-fade");
+}, 18000);
+
+$("#prompt-wrapper").mousemove(function() {
+    $("#prompt-wrapper").removeClass("prompt-in");
+    $("#prompt-wrapper").addClass("prompt-out");
+})
+

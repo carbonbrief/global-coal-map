@@ -10,13 +10,13 @@
 }
   
 .toggle {
-    color: #878787;
+    color: #b3b3b3;
     text-decoration: none;
     text-align: right;
 }
   
 .toggle:hover {
-    color: #f3f3f3;
+    color: #ffffff;
 }
   
 .arrow-right-hidden {
