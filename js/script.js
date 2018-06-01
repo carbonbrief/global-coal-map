@@ -670,7 +670,7 @@ if (screenWidth > 980) {
     }, 6000);
 }
 
-$(document).one("click", function () {
+$(document).one("mousedown", function () {
     clearTimeout(promptTimeout);
     console.log("clear timeout");
 })
