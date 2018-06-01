@@ -667,7 +667,7 @@ if (screenWidth < 640) {
 if (screenWidth > 980) {
     var promptTimeout = setTimeout(function() {
         $("#prompt-wrapper").toggleClass("prompt-in prompt-out");
-    }, 6000);
+    }, 7000);
 }
 
 $(document).one("mousedown", function () {
@@ -678,7 +678,7 @@ $(document).one("mousedown", function () {
 setTimeout(function() {
     $("#prompt-wrapper").removeClass("prompt-in");
     $("#prompt-wrapper").addClass("prompt-fade");
-}, 18000);
+}, 22000);
 
 $("#prompt-wrapper").mousemove(function() {
     $("#prompt-wrapper").removeClass("prompt-in");
