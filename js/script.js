@@ -664,9 +664,11 @@ if (screenWidth < 640) {
 
 // BRING IN PROMPT
 
-var promptTimeout = setTimeout(function() {
-    $("#prompt-wrapper").toggleClass("prompt-in prompt-out");
-}, 6000);
+if (screenWidth > 980) {
+    var promptTimeout = setTimeout(function() {
+        $("#prompt-wrapper").toggleClass("prompt-in prompt-out");
+    }, 6000);
+}
 
 $(document).one("click", function () {
     clearTimeout(promptTimeout);
