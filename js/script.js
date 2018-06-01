@@ -662,7 +662,7 @@ if (screenWidth < 640) {
     }, 1700);
 }
 
-// BRING IN PROMPT
+// PROMPT BEHAVIOURS
 
 if (screenWidth > 980) {
     var promptTimeout = setTimeout(function() {
@@ -670,6 +670,7 @@ if (screenWidth > 980) {
     }, 7000);
 }
 
+// clear timeout when the user start interacting with the map, so not distracting
 $(document).one("mousedown", function () {
     clearTimeout(promptTimeout);
     console.log("clear timeout");
