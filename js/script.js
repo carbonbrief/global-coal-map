@@ -361,7 +361,7 @@ map.on('load', function() {
         year = parseInt(e.target.value);
         
         // update any map filters containing the variable year
-        var filterNew = ['all', ['==', ['number', ['get', 'start2']], year], ['==', ['number', ['get', 'year1']], year]];
+        filterNew = ['all', ['==', ['number', ['get', 'start2']], year], ['==', ['number', ['get', 'year1']], year]];
         filterClosing1 = ['all', ['==', ['number', ['get', 'retire3']], (year+1)], ['==', ['number', ['get', 'year2']], 2017]];
         filterClosing2 = ['all', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'year2']], year]];
         filterClosing = ['any', filterClosing1, filterClosing2];
@@ -475,6 +475,9 @@ map.on('load', function() {
         var techType = e.features[0].properties.type;
         var annualCarbon = e.features[0].properties.annualCarbon;
         var yearOpened = e.features[0].properties.startLabel;
+        var country = e.features[0].properties.country;
+
+
 
         year = document.getElementById('slider').value;
         var firstStart = e.features[0].properties.start1;
@@ -490,7 +493,14 @@ map.on('load', function() {
         // Populate the popup and set its coordinates
         // based on the feature found.
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ffc83e;">' + name + '</h3><p><span class="label-title">Capacity: </span>' + capacity + ' MW</p><p><span class="label-title">Coal type: </span>' + coalType + '</p><p><span class="label-title">Technology: </span>' + techType + '</p><p><span class="label-title">Carbon emissions: </span>' + annualCarbon + ' mt/year</p><p><span class="label-title">Year opened: </span>' + yearOpened + '</p><p><span class="label-title">Age: </span>' + (year-firstStart) + ' year(s)</p>')
+            .setHTML('<h3 style = "color: #ffc83e;">' + name 
+            + '</h3><p><span class="label-title">Capacity: </span>' + capacity 
+            + ' MW</p><p><span class="label-title">Coal type: </span>' + coalType 
+            + '</p><p><span class="label-title">Technology: </span>' + techType 
+            + '</p><p><span class="label-title">CO2 emissions: </span>' + annualCarbon 
+            + ' Mt/year</p><p><span class="label-title">Country: </span>' + country
+            + '</p><p><span class="label-title">Year opened: </span>' + yearOpened 
+            + '</p><p><span class="label-title">Age: </span>' + (year-firstStart) + ' year(s)</p>')
             .addTo(map);
 
     });
@@ -505,6 +515,7 @@ map.on('load', function() {
         var techType = e.features[0].properties.type;
         var annualCarbon = e.features[0].properties.annualCarbon;
         var yearOpened = e.features[0].properties.startLabel;
+        var country = e.features[0].properties.country;
 
         year = document.getElementById('slider').value;
         var firstStart = e.features[0].properties.start1;
@@ -514,7 +525,14 @@ map.on('load', function() {
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ced1cc;">' + name + '</h3><p><span class="label-title">Capacity: </span>' + capacity + ' MW</p><p><span class="label-title">Coal type: </span>' + coalType + '</p><p><span class="label-title">Technology: </span>' + techType + '</p><p><span class="label-title">Carbon emissions: </span>' + annualCarbon + ' mt/year</p><p><span class="label-title">Year opened: </span>' + yearOpened + '</p><p><span class="label-title">Age: </span>' + (year-firstStart) + ' year(s)</p>')
+            .setHTML('<h3 style = "color: #ced1cc;">' + name 
+            + '</h3><p><span class="label-title">Capacity: </span>' + capacity 
+            + ' MW</p><p><span class="label-title">Coal type: </span>' + coalType 
+            + '</p><p><span class="label-title">Technology: </span>' + techType 
+            + '</p><p><span class="label-title">CO2 emissions: </span>' + annualCarbon 
+            + ' Mt/year</p><p><span class="label-title">Country: </span>' + country
+            + '</p><p><span class="label-title">Year opened: </span>' + yearOpened 
+            + '</p><p><span class="label-title">Age: </span>' + (year-firstStart) + ' year(s)</p>')
             .addTo(map);
 
     });
@@ -529,6 +547,7 @@ map.on('load', function() {
         var techType = e.features[0].properties.type;
         var annualCarbon = e.features[0].properties.annualCarbon;
         var yearOpened = e.features[0].properties.startLabel;
+        var country = e.features[0].properties.country;
 
         year = document.getElementById('slider').value;
         var firstStart = e.features[0].properties.start1;
@@ -538,7 +557,14 @@ map.on('load', function() {
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #ff8767;">' + name + '</h3><p><span class="label-title">Capacity: </span>' + capacity + ' MW</p><p><span class="label-title">Coal type: </span>' + coalType + '</p><p><span class="label-title">Technology: </span>' + techType + '</p><p><span class="label-title">Carbon emissions: </span>' + annualCarbon + ' mt/year</p><p><span class="label-title">Year opened: </span>' + yearOpened + '</p><p><span class="label-title">Age: </span>' + (year-firstStart) + ' year(s)</p>')
+            .setHTML('<h3 style = "color: #ff8767;">' + name 
+            + '</h3><p><span class="label-title">Capacity: </span>' + capacity 
+            + ' MW</p><p><span class="label-title">Coal type: </span>' + coalType 
+            + '</p><p><span class="label-title">Technology: </span>' + techType 
+            + '</p><p><span class="label-title">CO2 emissions: </span>' + annualCarbon 
+            + ' Mt/year</p><p><span class="label-title">Country: </span>' + country
+            + '</p><p><span class="label-title">Year opened: </span>' + yearOpened 
+            + '</p><p><span class="label-title">Age: </span>' + (year-firstStart) + ' year(s)</p>')
             .addTo(map);
 
     });
@@ -552,13 +578,19 @@ map.on('load', function() {
         var coalType = e.features[0].properties.coalType;
         var techType = e.features[0].properties.type;
         var annualCarbon = e.features[0].properties.annualCarbon;
+        var country = e.features[0].properties.country;
 
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #dd54b6;">' + name + '</h3><p><span class="label-title">Capacity: </span>' + capacity + ' MW</p><p><span class="label-title">Coal type: </span>' + coalType +  '</p><p><span class="label-title">Technology: </span>' + techType + '</p><p><span class="label-title">Carbon emissions: </span>' + annualCarbon + ' mt/year</p>')
+            .setHTML('<h3 style = "color: #dd54b6;">' + name 
+            + '</h3><p><span class="label-title">Capacity: </span>' + capacity 
+            + ' MW</p><p><span class="label-title">Coal type: </span>' + coalType 
+            + '</p><p><span class="label-title">Technology: </span>' + techType 
+            + '</p><p><span class="label-title">CO2 emissions: </span>' + annualCarbon 
+            + ' Mt/year</p><p><span class="label-title">Country: </span>' + country + '</p>')
             .addTo(map);
 
     });
@@ -572,13 +604,21 @@ map.on('load', function() {
         var coalType = e.features[0].properties.coalType;
         var techType = e.features[0].properties.type;
         var annualCarbon = e.features[0].properties.annualCarbon;
+        var country = e.features[0].properties.country;
+        var status = e.features[0].properties.status;
 
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
         popup.setLngLat(coordinates)
-            .setHTML('<h3 style = "color: #a66edb;">' + name + '</h3><p><span class="label-title">Capacity: </span>' + capacity + ' MW</p><p><span class="label-title">Coal type: </span>' + coalType +  '</p><p><span class="label-title">Technology: </span>' + techType + '</p><p><span class="label-title">Carbon emissions: </span>' + annualCarbon + ' mt/year</p>')
+            .setHTML('<h3 style = "color: #a66edb;">' + name 
+            + '</h3><p><span class="label-title">Capacity: </span>' + capacity 
+            + ' MW</p><p><span class="label-title">Status: </span>' + status
+            + '</p><p><span class="label-title">Coal type: </span>' + coalType 
+            +  '</p><p><span class="label-title">Technology: </span>' + techType 
+            + '</p><p><span class="label-title">CO2 emissions: </span>' + annualCarbon
+            + ' Mt/year</p><p><span class="label-title">Country: </span>' + country + '</p>')
             .addTo(map);
 
     });
