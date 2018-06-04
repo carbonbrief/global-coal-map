@@ -156,6 +156,10 @@ p {
   margin-top: 40px;
 }
 
+#adb i {
+  font-size: 18px;
+}
+
 #adb li {
   color: #333333;
   list-style-type: circle;
