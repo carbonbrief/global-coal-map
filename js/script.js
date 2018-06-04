@@ -135,7 +135,7 @@ var filterNew = ['all', ['==', ['number', ['get', 'start2']], year], ['==', ['nu
 // grab plants where the slider year is the year BEFORE EITHER retire year
 // for retire 3 filter ensure that end year is also 2017 so that don't get multiple units showing
 var filterClosing1 = ['all', ['==', ['number', ['get', 'retire3']], (year+1)], ['==', ['number', ['get', 'year2']], 2017]];
-var filterClosing2 = ['==', ['number', ['get', 'retire1']], (year+1)];
+var filterClosing2 = ['all', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'year2']], year]];
 var filterClosing = ['any', filterClosing1, filterClosing2];
 
 // FUTURE
@@ -363,7 +363,7 @@ map.on('load', function() {
         // update any map filters containing the variable year
         var filterNew = ['all', ['==', ['number', ['get', 'start2']], year], ['==', ['number', ['get', 'year1']], year]];
         filterClosing1 = ['all', ['==', ['number', ['get', 'retire3']], (year+1)], ['==', ['number', ['get', 'year2']], 2017]];
-        filterClosing2 = ['==', ['number', ['get', 'retire1']], (year+1)];
+        filterClosing2 = ['all', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'year2']], year]];
         filterClosing = ['any', filterClosing1, filterClosing2];
         filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
         filterOperating = ['all', ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)], ['!=', ['number', ['get', 'retire3']], (year+1)]];
