@@ -145,6 +145,22 @@ p {
   height: 25px;
 }
 
+#adb {
+  position: fixed;
+  visibility: visible;
+  color: #333333;
+  z-index: -999999;
+  /* height: 100px; */
+  width: 30%;
+  margin-left: 45%;
+  margin-top: 40px;
+}
+
+#adb li {
+  color: #333333;
+  list-style-type: circle;
+}
+
 .prompt-wrapper {
   position: absolute;
   top: 55px;
@@ -542,6 +558,11 @@ li {
     position: relative;
     border-radius: 0px;
     background-color: rgb(65, 65, 65);
+  }
+
+  #adb {
+    width: 60%;
+    margin-left: 20%;
   }
 
   .row {

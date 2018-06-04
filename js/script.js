@@ -1,3 +1,14 @@
+// display adblocker message underneath if map tiles don't load
+// at top so that code not unreachable
+
+$(function(){
+    setTimeout(function(){
+       ($("#adb").css('visibility')=="visible")
+       console.log("display");
+   }, 1700);
+});
+
+
 if (!mapboxgl.supported()) {
     alert('Your browser does not support Mapbox GL');
 } else {
@@ -739,4 +750,3 @@ $("#prompt-wrapper").mousemove(function() {
     $(".prompt-wrapper").removeClass("prompt-in");
     $(".prompt-wrapper").addClass("prompt-out");
 })
-
