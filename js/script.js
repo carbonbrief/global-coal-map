@@ -579,6 +579,7 @@ map.on('load', function() {
         var techType = e.features[0].properties.type;
         var annualCarbon = e.features[0].properties.annualCarbon;
         var country = e.features[0].properties.country;
+        var status = e.features[0].properties.status;
 
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -586,8 +587,9 @@ map.on('load', function() {
 
         popup.setLngLat(coordinates)
             .setHTML('<h3 style = "color: #dd54b6;">' + name 
-            + '</h3><p><span class="label-title">Capacity: </span>' + capacity 
-            + ' MW</p><p><span class="label-title">Coal type: </span>' + coalType 
+            + '</h3><p><span class="label-title">Capacity: </span>' + capacity
+            + ' MW</p><p><span class="label-title">Status: </span>' + status 
+            + '</p><p><span class="label-title">Coal type: </span>' + coalType 
             + '</p><p><span class="label-title">Technology: </span>' + techType 
             + '</p><p><span class="label-title">CO2 emissions: </span>' + annualCarbon 
             + ' Mt/year</p><p><span class="label-title">Country: </span>' + country + '</p>')
