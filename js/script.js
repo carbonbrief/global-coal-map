@@ -128,12 +128,12 @@ var year = 2017;
 
 // NEW
 // grab plants where the start year equals start 2...don't use start1 or all different units will show at once
-var filterNew = ['==', ['number', ['get', 'start2']], year];
+// also make sure that equals year1 or units double up
+var filterNew = ['all', ['==', ['number', ['get', 'start2']], year], ['==', ['number', ['get', 'year1']], year]];
 
 // CLOSING
 // grab plants where the slider year is the year BEFORE EITHER retire year
-// var filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['all' ['==', ['number', ['get', 'retire3']], (year+1)], [['=='], ['number', ['get', 'year2']], 2017]]];
-// var filterClosing = ['all' ['==', ['number', ['get', 'retire3']], (year+1)], ['==', ['number', ['get', 'year2']], 2017]];
+// for retire 3 filter ensure that end year is also 2017 so that don't get multiple units showing
 var filterClosing1 = ['all', ['==', ['number', ['get', 'retire3']], (year+1)], ['==', ['number', ['get', 'year2']], 2017]];
 var filterClosing2 = ['==', ['number', ['get', 'retire1']], (year+1)];
 var filterClosing = ['any', filterClosing1, filterClosing2];
@@ -361,7 +361,7 @@ map.on('load', function() {
         year = parseInt(e.target.value);
         
         // update any map filters containing the variable year
-        filterNew = ['==', ['number', ['get', 'start2']], year];
+        var filterNew = ['all', ['==', ['number', ['get', 'start2']], year], ['==', ['number', ['get', 'year1']], year]];
         filterClosing1 = ['all', ['==', ['number', ['get', 'retire3']], (year+1)], ['==', ['number', ['get', 'year2']], 2017]];
         filterClosing2 = ['==', ['number', ['get', 'retire1']], (year+1)];
         filterClosing = ['any', filterClosing1, filterClosing2];
