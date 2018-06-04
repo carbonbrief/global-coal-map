@@ -132,7 +132,11 @@ var filterNew = ['==', ['number', ['get', 'start2']], year];
 
 // CLOSING
 // grab plants where the slider year is the year BEFORE EITHER retire year
-var filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)], ['==', ['number', ['get', 'retire3']], (year+1)], ];
+// var filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['all' ['==', ['number', ['get', 'retire3']], (year+1)], [['=='], ['number', ['get', 'year2']], 2017]]];
+// var filterClosing = ['all' ['==', ['number', ['get', 'retire3']], (year+1)], ['==', ['number', ['get', 'year2']], 2017]];
+var filterClosing1 = ['all', ['==', ['number', ['get', 'retire3']], (year+1)], ['==', ['number', ['get', 'year2']], 2017]];
+var filterClosing2 = ['==', ['number', ['get', 'retire1']], (year+1)];
+var filterClosing = ['any', filterClosing1, filterClosing2];
 
 // FUTURE
 // filter for construction
@@ -358,7 +362,9 @@ map.on('load', function() {
         
         // update any map filters containing the variable year
         filterNew = ['==', ['number', ['get', 'start2']], year];
-        filterClosing = ['any', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'retire2']], (year+1)], ['==', ['number', ['get', 'retire3']], (year+1)] ];
+        filterClosing1 = ['all', ['==', ['number', ['get', 'retire3']], (year+1)], ['==', ['number', ['get', 'year2']], 2017]];
+        filterClosing2 = ['==', ['number', ['get', 'retire1']], (year+1)];
+        filterClosing = ['any', filterClosing1, filterClosing2];
         filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
         filterOperating = ['all', ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)], ['!=', ['number', ['get', 'retire3']], (year+1)]];
         filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['==', ['string', ['get', 'status']], "Operating"] ];
@@ -664,12 +670,14 @@ if (screenWidth < 640) {
 
 // PROMPT BEHAVIOURS
 
+// select random number between 1 and 3
 var randomWrapper = Math.floor((Math.random() * 3) + 1);
 
 console.log(randomWrapper);
 
 if (screenWidth > 980) {
     var promptTimeout = setTimeout(function() {
+        // randomly show a different prompt each time
         $("#prompt-wrapper" + randomWrapper).toggleClass("prompt-in prompt-out");
     }, 8000);
 }
