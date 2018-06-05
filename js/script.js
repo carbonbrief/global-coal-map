@@ -456,7 +456,9 @@ map.on('load', function() {
         dropdown = e.target.value;
 
        // get id from array using the dropdown variable
-        var basemap = baseLayers.find(x => x.label === dropdown).id;
+        var basemap = baseLayers.find(function(x) {
+            return x.label === dropdown;
+        }).id;
 
         // console.log(basemap);
 

@@ -305,7 +305,9 @@ function updateTotal () {
     // get id from array using the dropdown variable
     //var total = totals.find(x => x.year === yearSlider).region;
 
-    var newArray = totals.filter(x => x.year === parseInt(yearSlider));
+    var newArray = totals.filter(function(x) {
+      return x.year === parseInt(yearSlider);
+    });
 
     //console.log(newArray);
 
