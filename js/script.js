@@ -9,18 +9,18 @@ if (!mapboxgl.supported()) {
     });
 }
 
-// mapboxgl.accessToken = config.key1;
+mapboxgl.accessToken = config.key1;
 
 var screenWidth = $(window).width();
 
 // only include geolocate and control on larger screens, to reduce clutter
 // include first to appears at top of controls
 
-// if (screenWidth > 1300){
-//     map.addControl(new MapboxGeocoder({
-//         accessToken: mapboxgl.accessToken,
-//     }));
-// }
+if (screenWidth > 1300){
+    map.addControl(new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+    }));
+}
 
 
 // Add zoom and rotation controls to the map.
