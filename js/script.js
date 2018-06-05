@@ -1,14 +1,3 @@
-// display adblocker message underneath if map tiles don't load
-// at top so that code not unreachable
-
-$(function(){
-    setTimeout(function(){
-       ($("#adb").css('visibility')=="visible")
-       console.log("display");
-   }, 1700);
-});
-
-
 if (!mapboxgl.supported()) {
     alert('Your browser does not support Mapbox GL');
 } else {
@@ -30,13 +19,8 @@ var screenWidth = $(window).width();
 // if (screenWidth > 1300){
 //     map.addControl(new MapboxGeocoder({
 //         accessToken: mapboxgl.accessToken,
-//         // types: "place"
 //     }));
 // }
-
-// map.addControl(new MapboxGeocoder({
-//     accessToken: mapboxgl.accessToken
-// }));
 
 
 // Add zoom and rotation controls to the map.
@@ -97,8 +81,6 @@ if (screenWidth > 980) {
 // map.addControl(new MapboxGeocoder({
 //     accessToken: mapboxgl.accessToken
 // }));
-
-
 
 var baseLayers = [{
     label: 'Dark',
@@ -748,7 +730,7 @@ setTimeout(function() {
     $(".prompt-wrapper").addClass("prompt-fade");
 }, 23000);
 
-$("#prompt-wrapper").mousemove(function() {
+$(".prompt-wrapper").mousemove(function() {
     $(".prompt-wrapper").removeClass("prompt-in");
     $(".prompt-wrapper").addClass("prompt-out");
 })

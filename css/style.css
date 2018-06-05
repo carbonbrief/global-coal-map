@@ -153,7 +153,7 @@ p {
   /* height: 100px; */
   width: 30%;
   margin-left: 45%;
-  margin-top: 40px;
+  margin-top: 140px;
 }
 
 #adb i {
@@ -567,6 +567,7 @@ li {
   #adb {
     width: 60%;
     margin-left: 20%;
+    margin-top: 100px;
   }
 
   .row {
