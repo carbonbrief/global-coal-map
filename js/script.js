@@ -717,7 +717,7 @@ if (screenWidth < 640) {
     $("#console").removeClass('console-close');
     $("#console").addClass('console-open');
 } else {
-    setTimeout(() => {
+    setTimeout(function () {
         $("#console").removeClass('console-close');
         $("#console").addClass('console-open');
     }, 1700);
