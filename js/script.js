@@ -16,7 +16,7 @@ var screenWidth = $(window).width();
 // only include geolocate and control on larger screens, to reduce clutter
 // include first to appears at top of controls
 
-if (screenWidth > 1300){
+if (screenWidth > 1200){
     map.addControl(new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
     }));
@@ -68,15 +68,16 @@ map.fitBounds(bounds, {padding: 10});
 
 // only include geolocate and control on larger screens, to reduce clutter
 // include last to appears at bottom of controls
-if (screenWidth > 980) {
+// removed for moment as not working in the iframe
+// if (screenWidth > 980) {
 
-    map.addControl(new mapboxgl.GeolocateControl({
-        fitBoundsOptions: {
-            maxZoom: 6
-        }
-    }));
+//     map.addControl(new mapboxgl.GeolocateControl({
+//         fitBoundsOptions: {
+//             maxZoom: 6
+//         }
+//     }));
 
-}
+// }
 
 // map.addControl(new MapboxGeocoder({
 //     accessToken: mapboxgl.accessToken

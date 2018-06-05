@@ -14,7 +14,7 @@ body {
 
 #home-button-wrapper {
   position: absolute;
-  top: 200px;
+  top: 160px;
   right: 10px;
   height: 18px;
   width: 18px;
@@ -171,14 +171,6 @@ p {
   right: -140px;
 }
 
-#prompt-wrapper1 {
-  top: 55px;
-}
-
-#prompt-wrapper2 {
-  top: 95px;
-}
-
 .prompt {
   position: relative;
   font-size: 13px;
@@ -187,11 +179,19 @@ p {
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px; 
-  width: 120px; 
-  height: 36px;
+  width: 95px; 
+  /* height: 36px; */
   padding: 8px;
   opacity: 1;
   animation: fade 2s ease-in-out infinite;
+}
+
+#prompt-wrapper1 {
+  top: 105px;
+}
+
+#prompt-wrapper2 {
+  top: 145px;
 }
 
 /* add the arrow to the prompt box */
@@ -379,10 +379,6 @@ li {
     width: 380px;
   }
 
-  #home-button-wrapper {
-    top: 150px;
-  }
-
   .selector {
     width: 180px;
   }
@@ -418,6 +414,20 @@ li {
 
   .axis.label {
     font-size: 11.5px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #home-button-wrapper {
+    top: 110px;
+  }
+
+  #prompt-wrapper1 {
+    top: 55px;
+  }
+  
+  #prompt-wrapper2 {
+    top: 95px;
   }
 }
 
