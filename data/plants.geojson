@@ -11457,7 +11457,7 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 21.779911,72.978904 ]
+       "coordinates":  [ 72.978904, 21.779911 ]
     },
     "properties": {
     "annualCarbon":7.61,
