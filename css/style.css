@@ -165,6 +165,13 @@ p {
   list-style-type: circle;
 }
 
+#scroll-area {
+  position: absolute;
+  right: 0px;
+  width: 50px;
+  height: 800px;        
+}
+
 .prompt-wrapper {
   position: absolute;
   top: 55px;
@@ -429,6 +436,10 @@ li {
   #prompt-wrapper2 {
     top: 95px;
   }
+
+  #scroll-area {
+    width: 40px;
+  }
 }
 
 @media screen and (max-width: 1100px) {
@@ -489,6 +500,10 @@ li {
     height: 250px;
   }
 
+  #scroll-area {
+    width: 30px;
+  }
+
 }
 
 @media screen and (max-width: 980px) {
@@ -511,6 +526,10 @@ li {
 
   #first-title {
     width: 140px;
+  }
+
+  #scroll-area {
+    width: 20px;
   }
 
   h1 {
@@ -566,6 +585,10 @@ li {
     display: none;
   }
 
+  #scroll-area {
+    width: 10px;
+  }
+
   #console {
     width: 100%;
     margin: 0px;
@@ -596,6 +619,10 @@ li {
 }
 
 @media screen and (max-width: 480px) {
+
+  #adb {
+    visibility: hidden;
+  }
 
   #logo-tablet {
     visibility: hidden;
