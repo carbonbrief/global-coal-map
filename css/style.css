@@ -169,7 +169,7 @@ p {
   position: absolute;
   right: 0px;
   width: 50px;
-  height: 800px;        
+  height: 800px;       
 }
 
 .prompt-wrapper {
@@ -571,10 +571,6 @@ li {
     font-size: 13px;
   }
 
-  #scroll-area {
-    width: 30px;
-  }
-
 }
 
 @media screen and (max-width: 850px) {
@@ -602,10 +598,6 @@ li {
   .console-text {
     display: none;
   }
-
-  #scroll-area {
-    width: 20px;
-  }
 }
 
 @media screen and (max-width: 640px) {
@@ -626,6 +618,13 @@ li {
     border-radius: 0px;
     background-color: rgb(65, 65, 65);
   }
+
+  /* trying to get the scroll area to move above the map on a mobile */
+
+  /* #scroll-area {
+    position: absolute;
+    z-index: 999999; 
+  } */
 
   #adb {
     width: 60%;
