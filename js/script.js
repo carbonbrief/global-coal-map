@@ -3,7 +3,7 @@ if (!mapboxgl.supported()) {
 } else {
     var map = new mapboxgl.Map({
         container: 'map',
-        style: 'https://openmaptiles.github.io/dark-matter-gl-style/style-cdn.json',
+        style: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json',
         center: [8, 20],
         zoom: 1.5
     });
@@ -84,10 +84,10 @@ if (screenWidth > 980) {
 
 var baseLayers = [{
     label: 'Dark',
-    id: 'https://openmaptiles.github.io/dark-matter-gl-style/style-cdn.json'
+    id: 'https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json'
   }, {
     label: 'Light',
-    id: 'https://openmaptiles.github.io/klokantech-3d-gl-style/style-cdn.json'
+    id: 'https://basemaps.cartocdn.com/gl/voyager-gl-style/style.json'
   },{
     label: "Satellite",
     id: {
