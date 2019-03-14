@@ -386,7 +386,7 @@ map.on('load', function() {
         updateRegion(region);
 
         // add hash tag to url
-        region = region.replace(/\s+/g, '-');
+        region = region.replace(/\s+/g, '_');
         window.location.hash = region;
 
     });
@@ -619,14 +619,13 @@ map.on('load', function() {
         console.log("hash");
 
         region = window.location.hash;
-        region = region.replace(/-/g, ' ');
+        region = region.replace(/_/g, ' ');
         //delete hash
         region = region.substring(1);
 
         console.log(region);
 
         updateRegion(region);
-        // reDraw(region);
 
     };
 
@@ -634,6 +633,8 @@ map.on('load', function() {
 });
 
 function updateRegion() {
+
+    console.log(region);
 
     // declare year variable again so that it doesn't default to 2017
     year = document.getElementById('slider').value;
@@ -667,7 +668,7 @@ function updateRegion() {
         map.fitBounds([[54.24, -5], [80.64, 40]]);
     } else if (region == "Latin America") {
         map.fitBounds([[-140.16, -58], [-70.0, 40]]);
-    } else if (region == "Non EU Europe") {
+    } else if (region == "Non-EU Europe") {
         map.fitBounds([[-10, 30.56], [50, 45]]);
     } else if (region == "Other") {
         map.fitBounds([[-179, -70], [170, 88]]);

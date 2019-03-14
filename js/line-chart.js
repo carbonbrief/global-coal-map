@@ -14,7 +14,7 @@ var y = d3.scaleLinear()
 
 var color = d3.scaleOrdinal()
     // thinking it might be nice to do a different colour for an average
-    .domain(["Africa and Middle East", "China", "EU28", "Former USSR", "India", "Latin America", "Non EU Europe", "Other",  "Other Asia", "United States"])
+    .domain(["Africa and Middle East", "China", "EU28", "Former USSR", "India", "Latin America", "Non-EU Europe", "Other",  "Other Asia", "United States"])
     .range(["#ffc83e", "#ffc83e", "#ffc83e", "#ffc83e", "#ffc83e", "#ffc83e", "#ffc83e", "#ffc83e", "#ffc83e", "#ffc83e"]);
 
 var xAxis = d3.axisBottom(x);
@@ -49,9 +49,9 @@ var yearFormat = d3.timeFormat("%Y");
 var decimalFormat = d3.format(",.0f");
 
 // data for background trace lines
-var allData = {"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
+var allData = {"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non-EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
 // powerplants to be shown
-var filterData={"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
+var filterData={"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non-EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
 
 function drawChart(filterData){
     d3.csv("./data/line.csv", function(error, data) {
@@ -320,7 +320,7 @@ drawChart(filterData);
 function reDraw(region){
     
     if (region == "All") {
-        filterData = {"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
+        filterData = {"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non-EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
     }  else {
         filterData = {[region]: true};
     }
@@ -349,7 +349,7 @@ $(document).ready(function() {
 
     if(window.location.hash) {
         region = window.location.hash;
-        region = region.replace(/-/g, ' ');
+        region = region.replace(/_/g, ' ');
         //delete hash
         region = region.substring(1);
 
