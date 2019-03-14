@@ -342,3 +342,22 @@ $(window).on("resize", function () {
     d3.select("#bar-chart").select("#svg-3").attr("width", width + margin.left + margin.right);
 
 });
+
+// UPDATE CHART IF HASH IN URL
+
+$(document).ready(function() {
+
+    if(window.location.hash) {
+        region = window.location.hash;
+        region = region.replace(/-/g, ' ');
+        //delete hash
+        region = region.substring(1);
+
+        console.log(region);
+
+        reDraw(region);
+
+        $("#selectorRegion").val(region);
+    };
+
+});

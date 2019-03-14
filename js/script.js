@@ -626,6 +626,7 @@ map.on('load', function() {
         console.log(region);
 
         updateRegion(region);
+        // reDraw(region);
 
     };
 
