@@ -382,68 +382,24 @@ map.on('load', function() {
 
         // update variables
         region = e.target.value;
-        // declare year variable again so that it doesn't default to 2017
-        year = document.getElementById('slider').value;
 
-        // update filter
-        if (region == "All") {
-            filterRegion = ['!=', ['string', ['get', 'regionLabel']], "placeholder"];
-        } else {
-            filterRegion = ['==', ['string', ['get', 'regionLabel']], region];
-        }
-        
-        // update the map
-        map.setFilter('operating', ['all', filterOperating, filterOperating2, filterRegion]); //the filter only applies to the operating layer
-        map.setFilter('closing', ['all', filterClosing, filterRegion]);
-        map.setFilter('new', ['all', filterNew, filterRegion]);
-        map.setFilter('construction', ['all', filterFuture, filterConstruction, filterRegion]);
-        map.setFilter('planned', ['all', filterFuture, filterPlanned, filterRegion]);
+        updateRegion(region);
 
-        // zoom to filtered markers
-        if (region == "All") {
-            map.fitBounds([[ -188, -75],[90, 86]]);
-        } else if (region == "Africa and Middle East") {
-            map.fitBounds([[-29.69, -46.61], [54.43, 57.09]]);
-        } else if (region == "China") {
-            map.fitBounds([[36.35, 12.71], [145.99, 52.75]]);
-        } else if (region == "EU28") {
-            map.fitBounds([[-51.05, 35], [43.47, 60]]);
-        } else if (region == "Former USSR") {
-            map.fitBounds([[-80, 24.77], [175, 70.23]]);
-        } else if (region == "India") {
-            map.fitBounds([[54.24, -5], [80.64, 40]]);
-        } else if (region == "Latin America") {
-            map.fitBounds([[-140.16, -58], [-70.0, 40]]);
-        } else if (region == "Non-EU Europe") {
-            map.fitBounds([[-10, 30.56], [50, 45]]);
-        } else if (region == "Other") {
-            map.fitBounds([[-179, -70], [170, 88]]);
-        } else if (region == "Other Asia") {
-            map.fitBounds([[0, -21.35], [159.14, 56]]);
-        } else if (region == "United States") {
-            map.fitBounds([[-170.66, 19.40], [-56.38, 55]]);
-        } else {
-            // do nothing
-        }
-
-        // update text in the UI
-        document.getElementById('region').innerText = [region];
-
-        updateTotal();
-        updateFuture();
+        // add hash tag to url
+        region = region.replace(/\s+/g, '-');
+        window.location.hash = region;
 
     });
+
 
     document.getElementById("selectorStyle").addEventListener("change", function(e){
         // update variables
         dropdown = e.target.value;
 
-       // get id from array using the dropdown variable
+        // get id from array using the dropdown variable
         var basemap = baseLayers.find(function(x) {
             return x.label === dropdown;
         }).id;
-
-        // console.log(basemap);
 
         map.setStyle(basemap);
 
@@ -657,8 +613,78 @@ map.on('load', function() {
 
     });
 
+    // UPDATE LOCATION IF HASH IN URL
+    if(window.location.hash) {
+
+        console.log("hash");
+
+        region = window.location.hash;
+        region = region.replace(/-/g, ' ');
+        //delete hash
+        region = region.substring(1);
+
+        console.log(region);
+
+        updateRegion(region);
+
+    };
+
 
 });
+
+function updateRegion() {
+
+    // declare year variable again so that it doesn't default to 2017
+    year = document.getElementById('slider').value;
+
+    // update filter
+    if (region == "All") {
+        filterRegion = ['!=', ['string', ['get', 'regionLabel']], "placeholder"];
+    } else {
+        filterRegion = ['==', ['string', ['get', 'regionLabel']], region];
+    }
+    
+    // update the map
+    map.setFilter('operating', ['all', filterOperating, filterOperating2, filterRegion]); //the filter only applies to the operating layer
+    map.setFilter('closing', ['all', filterClosing, filterRegion]);
+    map.setFilter('new', ['all', filterNew, filterRegion]);
+    map.setFilter('construction', ['all', filterFuture, filterConstruction, filterRegion]);
+    map.setFilter('planned', ['all', filterFuture, filterPlanned, filterRegion]);
+
+    // zoom to filtered markers
+    if (region == "All") {
+        map.fitBounds([[ -188, -75],[90, 86]]);
+    } else if (region == "Africa and Middle East") {
+        map.fitBounds([[-29.69, -46.61], [54.43, 57.09]]);
+    } else if (region == "China") {
+        map.fitBounds([[36.35, 12.71], [145.99, 52.75]]);
+    } else if (region == "EU28") {
+        map.fitBounds([[-51.05, 35], [43.47, 60]]);
+    } else if (region == "Former USSR") {
+        map.fitBounds([[-80, 24.77], [175, 70.23]]);
+    } else if (region == "India") {
+        map.fitBounds([[54.24, -5], [80.64, 40]]);
+    } else if (region == "Latin America") {
+        map.fitBounds([[-140.16, -58], [-70.0, 40]]);
+    } else if (region == "Non EU Europe") {
+        map.fitBounds([[-10, 30.56], [50, 45]]);
+    } else if (region == "Other") {
+        map.fitBounds([[-179, -70], [170, 88]]);
+    } else if (region == "Other Asia") {
+        map.fitBounds([[0, -21.35], [159.14, 56]]);
+    } else if (region == "United States") {
+        map.fitBounds([[-170.66, 19.40], [-56.38, 55]]);
+    } else {
+        // do nothing
+    }
+
+    // update text in the UI
+    document.getElementById('region').innerText = [region];
+
+    updateTotal();
+    updateFuture();
+
+};
 
 map.on('style.load', function () {
     // Triggered when `setStyle` is called.
@@ -711,8 +737,6 @@ if (screenWidth < 640) {
 // select random number between 1 and 3
 var randomWrapper = Math.floor((Math.random() * 3) + 1);
 
-console.log(randomWrapper);
-
 if (screenWidth > 980) {
     var promptTimeout = setTimeout(function() {
         // randomly show a different prompt each time
@@ -723,7 +747,6 @@ if (screenWidth > 980) {
 // clear timeout when the user start interacting with the map, so not distracting
 $(document).one("mousedown", function () {
     clearTimeout(promptTimeout);
-    console.log("clear timeout");
 })
 
 setTimeout(function() {

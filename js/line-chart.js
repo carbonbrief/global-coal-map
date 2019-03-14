@@ -14,7 +14,7 @@ var y = d3.scaleLinear()
 
 var color = d3.scaleOrdinal()
     // thinking it might be nice to do a different colour for an average
-    .domain(["Africa and Middle East", "China", "EU28", "Former USSR", "India", "Latin America", "Non-EU Europe", "Other",  "Other Asia", "United States"])
+    .domain(["Africa and Middle East", "China", "EU28", "Former USSR", "India", "Latin America", "Non EU Europe", "Other",  "Other Asia", "United States"])
     .range(["#ffc83e", "#ffc83e", "#ffc83e", "#ffc83e", "#ffc83e", "#ffc83e", "#ffc83e", "#ffc83e", "#ffc83e", "#ffc83e"]);
 
 var xAxis = d3.axisBottom(x);
@@ -49,9 +49,9 @@ var yearFormat = d3.timeFormat("%Y");
 var decimalFormat = d3.format(",.0f");
 
 // data for background trace lines
-var allData = {"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non-EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
+var allData = {"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
 // powerplants to be shown
-var filterData={"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non-EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
+var filterData={"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
 
 function drawChart(filterData){
     d3.csv("./data/line.csv", function(error, data) {
@@ -103,7 +103,6 @@ function drawChart(filterData){
 
             reDraw(region);
 
-            console.log(region);
         }
 
 
@@ -141,14 +140,11 @@ function drawChart(filterData){
         // ADD LINES
     
         var boo=powerplants.filter(function(d){return filterData[d.name]==true;});
-        console.log("filter");
-        console.log(boo);
     
         var plant = svg.selectAll(".plant")
         .data(powerplants.filter(function(d){return filterData[d.name]==true;}))
         .enter().append("g");
-        
-        console.log(plant);
+    
 
         svg.selectAll(".plant")
         .data(powerplants.filter(function(d){return filterData[d.name]==true;}))
@@ -292,14 +288,10 @@ function drawBackground(allData) {
         svg2.selectAll("*").remove();
 
         var boo2 =powerplants2.filter(function(d){return allData[d.name]==true;});
-        console.log("filter");
-        console.log(boo2);
     
         var plant2 = svg2.selectAll(".plant-background")
         .data(powerplants2.filter(function(d){return allData[d.name]==true;}))
         .enter().append("g");
-        
-        console.log(plant2);
 
         svg2.selectAll(".plant-background")
         .data(powerplants2.filter(function(d){return allData[d.name]==true;}))
@@ -328,12 +320,11 @@ drawChart(filterData);
 function reDraw(region){
     
     if (region == "All") {
-        filterData = {"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non-EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
+        filterData = {"Africa and Middle East":true,"China":true,"EU28":true, "Former USSR": true, "India":true, "Latin America":true, "Non EU Europe": true,  "Other":true, "Other Asia":true, "United States":true };
     }  else {
         filterData = {[region]: true};
     }
-	console.log("redraw :");
-	console.log(filterData);
+
     drawChart(filterData);
     
 }

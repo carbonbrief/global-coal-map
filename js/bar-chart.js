@@ -5,7 +5,6 @@ function getHeight () {
         return 260
     } 
 }
-console.log(screenWidth);
 
 var responsiveHeight = getHeight();
 
