@@ -266,31 +266,31 @@ var totals = [
 }]
 
 var construction = {
-  "China": "94,828",
+  "China": "128,650",
   "United States": "0",
-  "India": "43,628",
+  "India": "36,158",
   "Other Asia": "49,744",
-  "EU28": "5,810",
+  "EU28": "6,590",
   "Former USSR":"1,176",
-  "Non-EU Europe":"1,130",
-  "Latin America":"2,175",
-  "Africa and Middle East":"11,075",
+  "Non-EU Europe":"800",
+  "Latin America":"1,605",
+  "Africa and Middle East":"10,940",
   "Other":"0",
-  "All": "209,566"
+  "All": "232,133"
 }
 
 var planned = {
-  "China": "116,075",
+  "China": "69,950",
   "United States": "0",
-  "India": "87,731",
+  "India": "57,800",
   "Other Asia": "127,969",
-  "EU28": "9,270",
+  "EU28": "8,880",
   "Former USSR":"1,176",
-  "Non-EU Europe":"49,873",
-  "Latin America":"3,466",
-  "Africa and Middle East":"45,940",
+  "Non-EU Europe":"42,975",
+  "Latin America":"4,176",
+  "Africa and Middle East":"43,110",
   "Other":"0",
-  "All": "442,724"
+  "All": "306,651"
 }
 
 function updateTotal () {
