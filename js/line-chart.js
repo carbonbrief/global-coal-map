@@ -78,7 +78,7 @@ function drawChart(filterData){
 
         x.domain([
 
-            parseDate2(19990701), parseDate2(20170701)
+            parseDate2(19990701), parseDate2(20180701)
 
         ]);
 
@@ -274,7 +274,7 @@ function drawBackground(allData) {
 
         x.domain([
 
-            parseDate2(19990701), parseDate2(20170701)
+            parseDate2(19990701), parseDate2(20180701)
 
         ]);
 

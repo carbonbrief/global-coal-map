@@ -337,7 +337,7 @@ document.getElementById('slider').addEventListener('input', function(e) {
 
   year = parseInt(e.target.value);
 
-  if (year == 2018) {
+  if (year == 2019) {
     document.getElementById("construction").style.display = "inline";
     document.getElementById("planned").style.display = "inline";
   } else {

@@ -57,7 +57,7 @@ d3.csv("./data/bar.csv", function(error, data) {
       .style("opacity", 0);
 
     svg3.selectAll(".bar")
-      .filter(function(d) { return d.year == 2017 })
+      .filter(function(d) { return d.year == 2018 })
       .transition()
       .duration(800)
       .style("opacity", 1);

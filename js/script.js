@@ -116,7 +116,7 @@ var baseLayers = [{
     }
 }];
 
-var year = 2017;
+var year = 2018;
 
 // SET UP FILTERS
 
@@ -128,7 +128,7 @@ var filterNew = ['all', ['==', ['number', ['get', 'start2']], year], ['==', ['nu
 // CLOSING
 // grab plants where the slider year is the year BEFORE EITHER retire year
 // for retire 3 filter ensure that end year is also 2017 so that don't get multiple units showing
-var filterClosing1 = ['all', ['==', ['number', ['get', 'retire3']], (year+1)], ['==', ['number', ['get', 'year2']], 2017]];
+var filterClosing1 = ['all', ['==', ['number', ['get', 'retire3']], (year+1)], ['==', ['number', ['get', 'year2']], 2018]];
 var filterClosing2 = ['all', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'year2']], year]];
 var filterClosing = ['any', filterClosing1, filterClosing2];
 
@@ -139,7 +139,7 @@ var filterConstruction = ['==', ['string', ['get', 'status']], 'Construction'];
 var filterPlanned = ['any', ['==', ['string', ['get', 'status']], 'Permitted'], ['==', ['string', ['get', 'status']], 'Pre-permit'], ['==', ['string', ['get', 'status']], 'Announced'] ];
 // link to slider
 // ensure that planned and construction colours only show on the future, ie. when the slider is at position 2018
-var filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
+var filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2019]];
 
 // OPERATIONAL
 // grab plants that don't fit into closing or new categories
@@ -172,7 +172,8 @@ var getYear = {
     2015: "2015",
     2016: "2016",
     2017: "2017",
-    2018: "Future"
+    2018: "2018",
+    2019: "Future"
 }
 
 function addDataLayers() {
@@ -356,10 +357,10 @@ map.on('load', function() {
         
         // update any map filters containing the variable year
         filterNew = ['all', ['==', ['number', ['get', 'start2']], year], ['==', ['number', ['get', 'year1']], year]];
-        filterClosing1 = ['all', ['==', ['number', ['get', 'retire3']], (year+1)], ['==', ['number', ['get', 'year2']], 2017]];
+        filterClosing1 = ['all', ['==', ['number', ['get', 'retire3']], (year+1)], ['==', ['number', ['get', 'year2']], 2018]];
         filterClosing2 = ['all', ['==', ['number', ['get', 'retire1']], (year+1)], ['==', ['number', ['get', 'year2']], year]];
         filterClosing = ['any', filterClosing1, filterClosing2];
-        filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2018]];
+        filterFuture = ['all', ['==', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year1']], 2019]];
         filterOperating = ['all', ['!=', ['number', ['get', 'start2']], year], ['!=', ['number', ['get', 'retire1']], (year+1)], ['!=', ['number', ['get', 'retire2']], (year+1)], ['!=', ['number', ['get', 'retire3']], (year+1)]];
         filterOperating2 = ['all', ['<=', ['number', ['get', 'year1']], year], ['>=', ['number', ['get', 'year2']], year], ['==', ['string', ['get', 'status']], "Operating"] ];
 
