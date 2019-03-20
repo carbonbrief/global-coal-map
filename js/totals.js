@@ -270,13 +270,13 @@ var totals = [
     "China": 965416,
     "United States": 190819,
     "India": 220608,
-    "Other Asia": 191088.1,
+    "Other Asia": 182169.1,
     "EU28": 61569,
     "Former USSR": 73609,
     "Non-EU Europe": 29229,
     "Latin America": 11120,
     "Africa and Middle East": 42352,
-    "Other": 36089,
+    "Other": 6401,
     "All": 1783292.1
   }
 ]
@@ -285,7 +285,7 @@ var construction = {
   "China": "128,650",
   "United States": "0",
   "India": "36,158",
-  "Other Asia": "49,744",
+  "Other Asia": "49,788",
   "EU28": "6,590",
   "Former USSR":"1,102",
   "Non-EU Europe":"800",
@@ -299,7 +299,7 @@ var planned = {
   "China": "69,950",
   "United States": "0",
   "India": "57,800",
-  "Other Asia": "127,969",
+  "Other Asia": "103,840",
   "EU28": "8,880",
   "Former USSR":"5,740",
   "Non-EU Europe":"42,975",
